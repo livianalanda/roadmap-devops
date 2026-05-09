@@ -1,0 +1,2675 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DevOps Roadmap — Mapa Mestre</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@300;400;500;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #050810;
+  --bg2: #090e1a;
+  --bg3: #0d1425;
+  --panel: #0f1828;
+  --panel2: #131e30;
+  --border: #1e2d45;
+  --border2: #253551;
+  --text: #e2eaf8;
+  --muted: #6b82a8;
+  --muted2: #4a6080;
+  --accent: #3b82f6;
+  --accent2: #60a5fa;
+  --green: #22c55e;
+  --green2: #4ade80;
+  --orange: #f59e0b;
+  --orange2: #fbbf24;
+  --red: #ef4444;
+  --purple: #a855f7;
+  --purple2: #c084fc;
+  --cyan: #06b6d4;
+  --cyan2: #22d3ee;
+  --pink: #ec4899;
+  --yellow: #eab308;
+  --teal: #14b8a6;
+  --glow: 0 0 30px rgba(59,130,246,0.15);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Outfit', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* BACKGROUND */
+body::before {
+  content: '';
+  position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+  background:
+    radial-gradient(ellipse 80% 40% at 10% 20%, rgba(59,130,246,0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 60% at 90% 80%, rgba(168,85,247,0.05) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 30% at 50% 50%, rgba(6,182,212,0.03) 0%, transparent 70%);
+  pointer-events: none; z-index: 0;
+}
+
+/* NOISE OVERLAY */
+body::after {
+  content: '';
+  position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.025'/%3E%3C/svg%3E");
+  pointer-events: none; z-index: 0; opacity: 0.4;
+}
+
+.container { max-width: 1400px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+
+/* HEADER */
+header {
+  padding: 80px 0 60px;
+  text-align: center;
+  position: relative;
+}
+.header-tag {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--accent2);
+  border: 1px solid rgba(59,130,246,0.3);
+  padding: 6px 16px;
+  border-radius: 100px;
+  margin-bottom: 28px;
+  background: rgba(59,130,246,0.06);
+}
+header h1 {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(42px, 6vw, 88px);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -2px;
+  background: linear-gradient(135deg, #e2eaf8 0%, #60a5fa 40%, #a855f7 80%, #ec4899 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 16px;
+}
+header .subtitle {
+  font-size: 17px;
+  color: var(--muted);
+  font-weight: 300;
+  letter-spacing: 0.5px;
+  max-width: 600px;
+  margin: 0 auto 40px;
+  line-height: 1.6;
+}
+.header-stats {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+.stat {
+  text-align: center;
+}
+.stat-num {
+  font-family: 'Syne', sans-serif;
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--accent2);
+}
+.stat-label {
+  font-size: 11px;
+  color: var(--muted2);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-top: 2px;
+}
+
+/* NAV */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(5,8,16,0.85);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 0;
+}
+.nav-inner {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding: 0 24px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+.nav-inner::-webkit-scrollbar { display: none; }
+.nav-btn {
+  flex-shrink: 0;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  transition: all 0.2s;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.nav-btn:hover { border-color: var(--accent); color: var(--accent2); background: rgba(59,130,246,0.08); }
+.nav-btn.active { border-color: var(--accent); color: var(--accent2); background: rgba(59,130,246,0.12); }
+
+/* SECTIONS */
+section { padding: 70px 0; }
+section:not(:last-child) { border-bottom: 1px solid var(--border); }
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 48px;
+}
+.section-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--accent);
+  letter-spacing: 2px;
+  opacity: 0.7;
+  min-width: 30px;
+}
+.section-title {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(22px, 3vw, 36px);
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  color: var(--text);
+}
+.section-desc {
+  color: var(--muted);
+  font-size: 14px;
+  margin-top: 6px;
+  line-height: 1.5;
+}
+
+/* CARDS GRID */
+.cards-grid { display: grid; gap: 16px; }
+.cards-grid-2 { grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); }
+.cards-grid-3 { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+.cards-grid-4 { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
+
+.card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 24px;
+  transition: all 0.25s;
+  position: relative;
+  overflow: hidden;
+}
+.card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--card-accent, var(--accent)), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.card:hover { border-color: var(--border2); transform: translateY(-2px); box-shadow: 0 8px 40px rgba(0,0,0,0.4); }
+.card:hover::before { opacity: 1; }
+
+.card-icon { font-size: 28px; margin-bottom: 12px; display: block; }
+.card-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: var(--text);
+}
+.card-body {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.65;
+}
+.card-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 14px; }
+.tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  padding: 3px 8px;
+  border-radius: 4px;
+  border: 1px solid;
+  font-weight: 500;
+}
+.tag-blue { color: var(--accent2); border-color: rgba(96,165,250,0.3); background: rgba(59,130,246,0.08); }
+.tag-green { color: var(--green2); border-color: rgba(74,222,128,0.3); background: rgba(34,197,94,0.08); }
+.tag-orange { color: var(--orange2); border-color: rgba(251,191,36,0.3); background: rgba(245,158,11,0.08); }
+.tag-purple { color: var(--purple2); border-color: rgba(192,132,252,0.3); background: rgba(168,85,247,0.08); }
+.tag-red { color: #fca5a5; border-color: rgba(239,68,68,0.3); background: rgba(239,68,68,0.08); }
+.tag-cyan { color: var(--cyan2); border-color: rgba(34,211,238,0.3); background: rgba(6,182,212,0.08); }
+.tag-pink { color: #f9a8d4; border-color: rgba(236,72,153,0.3); background: rgba(236,72,153,0.08); }
+.tag-teal { color: #5eead4; border-color: rgba(20,184,166,0.3); background: rgba(20,184,166,0.08); }
+
+/* PRIORITY BADGES */
+.badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; font-weight: 700;
+  padding: 3px 10px; border-radius: 100px;
+  text-transform: uppercase; letter-spacing: 1px;
+}
+.badge-critical { background: rgba(239,68,68,0.15); color: #fca5a5; border: 1px solid rgba(239,68,68,0.3); }
+.badge-high { background: rgba(245,158,11,0.15); color: var(--orange2); border: 1px solid rgba(245,158,11,0.3); }
+.badge-medium { background: rgba(59,130,246,0.15); color: var(--accent2); border: 1px solid rgba(59,130,246,0.3); }
+.badge-nice { background: rgba(168,85,247,0.15); color: var(--purple2); border: 1px solid rgba(168,85,247,0.3); }
+
+/* DIFF BAR */
+.diff-bar { margin-top: 10px; }
+.diff-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--muted2); margin-bottom: 4px; letter-spacing: 1px; }
+.diff-track { background: var(--bg3); border-radius: 100px; height: 5px; overflow: hidden; }
+.diff-fill { height: 100%; border-radius: 100px; transition: width 0.8s ease; }
+
+/* TABLE */
+.data-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.data-table th {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 1.5px;
+  color: var(--muted2);
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+.data-table td {
+  padding: 13px 16px;
+  border-bottom: 1px solid rgba(30,45,69,0.5);
+  color: var(--text);
+  line-height: 1.5;
+  vertical-align: top;
+}
+.data-table tr:hover td { background: rgba(255,255,255,0.02); }
+.data-table tr:last-child td { border-bottom: none; }
+
+/* TIMELINE */
+.timeline { position: relative; padding-left: 32px; }
+.timeline::before {
+  content: '';
+  position: absolute; left: 10px; top: 8px; bottom: 8px;
+  width: 1px; background: linear-gradient(to bottom, var(--accent), var(--purple), transparent);
+}
+.tl-item { position: relative; margin-bottom: 32px; }
+.tl-item::before {
+  content: '';
+  position: absolute; left: -26px; top: 6px;
+  width: 10px; height: 10px; border-radius: 50%;
+  background: var(--accent);
+  border: 2px solid var(--bg);
+  box-shadow: 0 0 12px rgba(59,130,246,0.5);
+}
+.tl-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: var(--accent2);
+  letter-spacing: 1px; text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.tl-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 17px; font-weight: 700;
+  color: var(--text); margin-bottom: 8px;
+}
+.tl-body { font-size: 13px; color: var(--muted); line-height: 1.65; }
+
+/* TREE / MIND MAP */
+.tree { display: flex; flex-direction: column; gap: 12px; }
+.tree-branch {
+  background: var(--panel2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.tree-branch-header {
+  display: flex; align-items: center; gap: 12px;
+  padding: 16px 20px;
+  cursor: pointer;
+  transition: background 0.2s;
+  user-select: none;
+}
+.tree-branch-header:hover { background: rgba(255,255,255,0.03); }
+.tree-branch-icon { font-size: 20px; flex-shrink: 0; }
+.tree-branch-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 15px; font-weight: 700; color: var(--text);
+  flex: 1;
+}
+.tree-branch-count {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; color: var(--muted2);
+}
+.tree-arrow { font-size: 12px; color: var(--muted2); transition: transform 0.3s; }
+.tree-branch.open .tree-arrow { transform: rotate(90deg); }
+.tree-leaves {
+  display: none;
+  padding: 0 20px 16px;
+  border-top: 1px solid var(--border);
+  padding-top: 14px;
+}
+.tree-branch.open .tree-leaves { display: block; }
+.leaf-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 8px; }
+.leaf {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 12px;
+  color: var(--text);
+  display: flex; align-items: center; gap: 8px;
+}
+.leaf-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+
+/* CHECKLIST */
+.checklist { display: flex; flex-direction: column; gap: 8px; }
+.check-item {
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 12px 16px;
+  background: var(--panel2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--text);
+  transition: all 0.2s;
+  cursor: pointer;
+}
+.check-item:hover { border-color: var(--border2); }
+.check-item.done { opacity: 0.4; text-decoration: line-through; color: var(--muted); }
+.check-box {
+  width: 18px; height: 18px; flex-shrink: 0;
+  border: 2px solid var(--border2);
+  border-radius: 4px;
+  display: flex; align-items: center; justify-content: center;
+  margin-top: 1px;
+  transition: all 0.2s;
+  font-size: 11px;
+}
+.check-item.done .check-box {
+  background: var(--green);
+  border-color: var(--green);
+  color: #000;
+}
+
+/* ROADMAP VISUAL */
+.roadmap-flow {
+  display: flex; gap: 0;
+  overflow-x: auto;
+  padding-bottom: 12px;
+}
+.roadmap-flow::-webkit-scrollbar { height: 4px; }
+.roadmap-flow::-webkit-scrollbar-track { background: var(--bg3); border-radius: 2px; }
+.roadmap-flow::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
+.flow-phase {
+  flex-shrink: 0;
+  min-width: 220px;
+  padding: 20px;
+  border-right: 1px solid var(--border);
+  position: relative;
+}
+.flow-phase:last-child { border-right: none; }
+.flow-phase-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 2px;
+  margin-bottom: 16px;
+  padding: 4px 10px; border-radius: 4px;
+  display: inline-block;
+}
+.phase-starter { background: rgba(34,197,94,0.1); color: var(--green2); border: 1px solid rgba(34,197,94,0.2); }
+.phase-junior { background: rgba(59,130,246,0.1); color: var(--accent2); border: 1px solid rgba(59,130,246,0.2); }
+.phase-mid { background: rgba(245,158,11,0.1); color: var(--orange2); border: 1px solid rgba(245,158,11,0.2); }
+.phase-senior { background: rgba(168,85,247,0.1); color: var(--purple2); border: 1px solid rgba(168,85,247,0.2); }
+.phase-elite { background: rgba(236,72,153,0.1); color: #f9a8d4; border: 1px solid rgba(236,72,153,0.2); }
+.flow-item {
+  display: flex; align-items: center; gap: 8px;
+  padding: 7px 0;
+  font-size: 12px; color: var(--text);
+  border-bottom: 1px solid rgba(30,45,69,0.3);
+}
+.flow-item:last-child { border-bottom: none; }
+.flow-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+
+/* SALARY TABLE */
+.salary-grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
+.salary-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 24px;
+  position: relative; overflow: hidden;
+}
+.salary-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+}
+.salary-br::before { background: linear-gradient(90deg, var(--green), var(--teal)); }
+.salary-us::before { background: linear-gradient(90deg, var(--accent), var(--purple)); }
+.salary-eu::before { background: linear-gradient(90deg, var(--orange), var(--pink)); }
+.salary-country {
+  font-family: 'Syne', sans-serif;
+  font-size: 18px; font-weight: 800;
+  margin-bottom: 16px;
+}
+.salary-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid rgba(30,45,69,0.4); }
+.salary-row:last-child { border-bottom: none; }
+.salary-level { font-size: 12px; color: var(--muted); }
+.salary-val { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 700; }
+
+/* CERT CARD */
+.cert-grid { display: grid; gap: 14px; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); }
+.cert-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 18px 20px;
+  display: flex; gap: 14px; align-items: flex-start;
+  transition: all 0.2s;
+}
+.cert-card:hover { border-color: var(--border2); transform: translateY(-2px); }
+.cert-logo { font-size: 32px; flex-shrink: 0; }
+.cert-body {}
+.cert-name {
+  font-family: 'Syne', sans-serif;
+  font-size: 14px; font-weight: 700;
+  margin-bottom: 4px;
+}
+.cert-desc { font-size: 12px; color: var(--muted); line-height: 1.5; margin-bottom: 8px; }
+.cert-weight { display: flex; gap: 6px; }
+
+/* PLAN */
+.plan-grid { display: grid; gap: 20px; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
+.plan-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+}
+.plan-header {
+  padding: 20px 24px;
+  background: var(--panel2);
+  border-bottom: 1px solid var(--border);
+}
+.plan-duration {
+  font-family: 'Syne', sans-serif;
+  font-size: 24px; font-weight: 800;
+  margin-bottom: 4px;
+}
+.plan-goal { font-size: 12px; color: var(--muted); }
+.plan-body { padding: 20px 24px; }
+.plan-week { margin-bottom: 14px; }
+.plan-week-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; color: var(--muted2);
+  text-transform: uppercase; letter-spacing: 1px;
+  margin-bottom: 6px;
+}
+.plan-tasks { display: flex; flex-direction: column; gap: 4px; }
+.plan-task {
+  font-size: 12px; color: var(--text);
+  display: flex; align-items: center; gap: 8px;
+}
+.plan-task::before { content: '→'; color: var(--accent); font-size: 10px; }
+
+/* COMPARISON */
+.comp-table { width: 100%; }
+.comp-table .header-row { display: grid; grid-template-columns: 160px repeat(3, 1fr); gap: 1px; }
+.comp-cell {
+  padding: 14px 16px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  font-size: 13px;
+}
+.comp-cell.head {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; font-weight: 700;
+  text-align: center;
+  background: var(--panel2);
+  color: var(--accent2);
+  letter-spacing: 1px;
+}
+.comp-cell.label {
+  font-size: 12px; color: var(--muted);
+  font-weight: 500;
+}
+.comp-row { display: grid; grid-template-columns: 160px repeat(3, 1fr); gap: 1px; margin-top: 1px; }
+.comp-cell.center { text-align: center; }
+
+/* MIND MAP SVG AREA */
+.mindmap-container {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 32px;
+  overflow-x: auto;
+}
+
+/* PROGRESS PATH */
+.progress-path {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0;
+  position: relative;
+}
+.progress-path::before {
+  content: '';
+  position: absolute; top: 28px; left: 10%; right: 10%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--green), var(--accent), var(--purple), var(--pink));
+}
+.path-node {
+  text-align: center;
+  padding: 0 10px;
+  position: relative; z-index: 1;
+}
+.path-circle {
+  width: 56px; height: 56px; border-radius: 50%;
+  margin: 0 auto 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px;
+  border: 2px solid;
+}
+.path-1 .path-circle { background: rgba(34,197,94,0.1); border-color: var(--green); }
+.path-2 .path-circle { background: rgba(59,130,246,0.1); border-color: var(--accent); }
+.path-3 .path-circle { background: rgba(245,158,11,0.1); border-color: var(--orange); }
+.path-4 .path-circle { background: rgba(168,85,247,0.1); border-color: var(--purple); }
+.path-5 .path-circle { background: rgba(236,72,153,0.1); border-color: var(--pink); }
+.path-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 13px; font-weight: 700;
+  margin-bottom: 4px;
+}
+.path-time { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--muted2); }
+
+/* ALERT BOX */
+.alert {
+  padding: 16px 20px;
+  border-radius: 10px;
+  font-size: 13px;
+  line-height: 1.6;
+  display: flex; gap: 12px; align-items: flex-start;
+  margin: 16px 0;
+}
+.alert-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+.alert-info { background: rgba(59,130,246,0.08); border: 1px solid rgba(59,130,246,0.25); color: var(--accent2); }
+.alert-warn { background: rgba(245,158,11,0.08); border: 1px solid rgba(245,158,11,0.25); color: var(--orange2); }
+.alert-success { background: rgba(34,197,94,0.08); border: 1px solid rgba(34,197,94,0.25); color: var(--green2); }
+.alert-danger { background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.25); color: #fca5a5; }
+.alert-body { color: var(--text); }
+.alert-body strong { color: var(--text); }
+
+/* CODE BLOCK */
+.code-block {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px 20px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--cyan2);
+  overflow-x: auto;
+  line-height: 1.7;
+}
+.code-comment { color: var(--muted2); }
+.code-keyword { color: var(--purple2); }
+.code-string { color: var(--green2); }
+
+/* SECTION DIVIDER */
+.divider {
+  display: flex; align-items: center; gap: 16px;
+  margin: 40px 0 32px;
+}
+.divider-line { flex: 1; height: 1px; background: var(--border); }
+.divider-text {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; color: var(--muted2);
+  text-transform: uppercase; letter-spacing: 2px;
+  white-space: nowrap;
+}
+
+/* FOOTER */
+footer {
+  padding: 60px 0 80px;
+  text-align: center;
+  border-top: 1px solid var(--border);
+}
+.footer-text { font-size: 13px; color: var(--muted2); line-height: 1.7; }
+.footer-logo {
+  font-family: 'Syne', sans-serif;
+  font-size: 24px; font-weight: 800;
+  background: linear-gradient(135deg, var(--accent2), var(--purple2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 12px;
+}
+
+/* ANIMATIONS */
+@keyframes fadeIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.5; } }
+.animate-in { animation: fadeIn 0.5s ease forwards; }
+
+/* BIG BANNER */
+.big-banner {
+  background: linear-gradient(135deg, rgba(59,130,246,0.08), rgba(168,85,247,0.08));
+  border: 1px solid rgba(59,130,246,0.2);
+  border-radius: 16px;
+  padding: 32px 36px;
+  margin-bottom: 32px;
+}
+.big-banner h3 {
+  font-family: 'Syne', sans-serif;
+  font-size: 20px; font-weight: 800;
+  margin-bottom: 10px;
+}
+.big-banner p { font-size: 14px; color: var(--muted); line-height: 1.6; }
+
+/* SKILL PILL */
+.skill-pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 12px;
+  padding: 5px 12px;
+  border-radius: 100px;
+  border: 1px solid var(--border2);
+  background: var(--panel);
+  margin: 3px;
+  color: var(--text);
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .cards-grid-2, .cards-grid-3, .cards-grid-4 { grid-template-columns: 1fr; }
+  .progress-path { grid-template-columns: 1fr; gap: 20px; }
+  .progress-path::before { display: none; }
+  header h1 { font-size: 38px; }
+  .comp-row, .comp-table .header-row { grid-template-columns: 1fr; }
+}
+
+/* SCROLLBAR */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--bg3); }
+::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 3px; }
+
+/* GLOW DOTS */
+.glow-dot {
+  display: inline-block; width: 8px; height: 8px; border-radius: 50%;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.credit {
+    text-align: center;
+    padding: 30px 20px;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.6);
+    letter-spacing: 1px;
+    margin-top: 60px;
+}
+
+.credit span {
+    color: #ffffff;
+    font-weight: 600;
+}
+</style>
+</head>
+<body>
+
+<header>
+<div class="container">
+  <div class="header-tag">🗺️ Roadmap Completo 2025–2028</div>
+  <h1>DevOps & Cloud<br>Engineering</h1>
+  <p class="subtitle">O mapa mestre mais completo e moderno — do zero absoluto até o nível internacional de elite.</p>
+  <div class="header-stats">
+    <div class="stat"><div class="stat-num">24</div><div class="stat-label">Módulos</div></div>
+    <div class="stat"><div class="stat-num">150+</div><div class="stat-label">Tópicos</div></div>
+    <div class="stat"><div class="stat-num">3</div><div class="stat-label">Anos de roadmap</div></div>
+    <div class="stat"><div class="stat-num">2025</div><div class="stat-label">Atualizado</div></div>
+  </div>
+</div>
+</header>
+
+<nav>
+  <div class="nav-inner">
+    <a href="#visao" class="nav-btn active">01 Visão Geral</a>
+    <a href="#fundamentos" class="nav-btn">02 Fundamentos</a>
+    <a href="#roadmap-tech" class="nav-btn">03 Roadmap Técnico</a>
+    <a href="#linux" class="nav-btn">04 Linux</a>
+    <a href="#redes" class="nav-btn">05 Redes</a>
+    <a href="#cloud" class="nav-btn">06 Cloud</a>
+    <a href="#containers" class="nav-btn">07 Containers</a>
+    <a href="#cicd" class="nav-btn">08 CI/CD</a>
+    <a href="#iac" class="nav-btn">09 IaC</a>
+    <a href="#observabilidade" class="nav-btn">10 Observabilidade</a>
+    <a href="#seguranca" class="nav-btn">11 Segurança</a>
+    <a href="#sre" class="nav-btn">12 SRE</a>
+    <a href="#ia" class="nav-btn">13 IA + DevOps</a>
+    <a href="#programacao" class="nav-btn">14 Programação</a>
+    <a href="#platform" class="nav-btn">15 Platform Eng</a>
+    <a href="#carreira" class="nav-btn">16 Carreira</a>
+    <a href="#portfolio" class="nav-btn">17 Portfólio</a>
+    <a href="#certs" class="nav-btn">18 Certificações</a>
+    <a href="#bigtechs" class="nav-btn">19 Big Techs</a>
+    <a href="#salarios" class="nav-btn">20 Salários</a>
+    <a href="#plano" class="nav-btn">21 Plano de Estudos</a>
+    <a href="#recursos" class="nav-btn">22 Recursos</a>
+    <a href="#mapa" class="nav-btn">23 Mapa Visual</a>
+    <a href="#mentalidade" class="nav-btn">24 Mentalidade</a>
+  </div>
+</nav>
+
+<main>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- SECTION 1: VISÃO GERAL -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section id="visao">
+<div class="container">
+  <div class="section-header">
+    <span class="section-num">01</span>
+    <div>
+      <div class="section-title">Visão Geral da Área</div>
+      <div class="section-desc">O que é DevOps, papéis profissionais, mercado e o futuro da profissão</div>
+    </div>
+  </div>
+
+  <div class="big-banner">
+    <h3>🎯 O que é DevOps de verdade?</h3>
+    <p>DevOps é uma <strong>cultura, filosofia e conjunto de práticas</strong> que unifica desenvolvimento de software (Dev) e operações de infraestrutura (Ops). Não é um cargo específico, não é uma ferramenta. É uma mentalidade de entregar software com velocidade, confiabilidade e segurança — quebrando silos entre times. A automação é o pilar técnico, mas a colaboração é o coração.</p>
+  </div>
+
+  <div class="alert alert-danger">
+    <span class="alert-icon">⚠️</span>
+    <div class="alert-body"><strong>O que DevOps NÃO é:</strong> Não é apenas "quem instala Jenkins". Não é o time que faz deploy. Não é só saber Docker e Kubernetes. Não é a pessoa que "cuida dos servidores". DevOps sem cultura de colaboração é só automação disfarçada.</div>
+  </div>
+
+  <div class="divider"><div class="divider-line"></div><div class="divider-text">Comparativo de Papéis</div><div class="divider-line"></div></div>
+
+  <div class="cards-grid cards-grid-2">
+    <div class="card" style="--card-accent:var(--accent)">
+      <span class="card-icon">⚙️</span>
+      <div class="card-title">DevOps Engineer</div>
+      <div class="card-body">Foco em CI/CD, automação de pipelines, IaC e cultura de entrega contínua. Trabalha na ponte entre Dev e Ops. Cria ferramentas e processos que permitem equipes entregarem mais rápido com qualidade.</div>
+      <div class="card-tags"><span class="tag tag-blue">CI/CD</span><span class="tag tag-green">Automação</span><span class="tag tag-orange">IaC</span></div>
+    </div>
+    <div class="card" style="--card-accent:var(--green)">
+      <span class="card-icon">🔬</span>
+      <div class="card-title">SRE — Site Reliability Engineer</div>
+      <div class="card-body">Criado pelo Google. Engenheiro de software que resolve problemas de operações com código. Foco em confiabilidade, SLOs/SLIs, automação de operações, redução de toil e chaos engineering. Mais próximo de engenharia do que operações.</div>
+      <div class="card-tags"><span class="tag tag-green">SLO/SLA</span><span class="tag tag-purple">Reliability</span><span class="tag tag-blue">Automation</span></div>
+    </div>
+    <div class="card" style="--card-accent:var(--orange)">
+      <span class="card-icon">☁️</span>
+      <div class="card-title">Cloud Engineer</div>
+      <div class="card-body">Especialista em projetar, implementar e gerenciar infraestrutura em nuvem (AWS, GCP, Azure). Cuida de networking, storage, compute, IAM, segurança e custo. Mais técnico e profundo em serviços cloud do que um DevOps generalista.</div>
+      <div class="card-tags"><span class="tag tag-orange">AWS/GCP/Azure</span><span class="tag tag-cyan">Networking</span><span class="tag tag-teal">IAM</span></div>
+    </div>
+    <div class="card" style="--card-accent:var(--purple)">
+      <span class="card-icon">🏗️</span>
+      <div class="card-title">Platform Engineer</div>
+      <div class="card-body">Constrói Internal Developer Platforms (IDPs). Foco em Developer Experience, self-service de infraestrutura, golden paths e ferramentas que permitem devs serem produtivos sem depender de times de infraestrutura. Tendência crescente de 2024–2028.</div>
+      <div class="card-tags"><span class="tag tag-purple">IDP</span><span class="tag tag-pink">DevEx</span><span class="tag tag-blue">Self-service</span></div>
+    </div>
+    <div class="card" style="--card-accent:var(--cyan)">
+      <span class="card-icon">🖥️</span>
+      <div class="card-title">Infrastructure Engineer</div>
+      <div class="card-body">Gerencia e escala infraestrutura física e virtual. Responsável por servidores, storage, networking, virtualização e data centers. Em cloud, cuida de capacity planning e otimização de recursos.</div>
+      <div class="card-tags"><span class="tag tag-cyan">Servidores</span><span class="tag tag-teal">Networking</span><span class="tag tag-orange">Storage</span></div>
+    </div>
+    <div class="card" style="--card-accent:var(--red)">
+      <span class="card-icon">🔐</span>
+      <div class="card-title">DevSecOps Engineer</div>
+      <div class="card-body">Integra segurança no pipeline de DevOps — "shift left". Cuida de SAST/DAST, secret management, container security, compliance as code e testes de vulnerabilidade automatizados. A demanda explodiu em 2024.</div>
+      <div class="card-tags"><span class="tag tag-red">Segurança</span><span class="tag tag-orange">Compliance</span><span class="tag tag-purple">SAST/DAST</span></div>
+    </div>
+    <div class="card" style="--card-accent:var(--pink)">
+      <span class="card-icon">🏛️</span>
+      <div class="card-title">Cloud Architect</div>
+      <div class="card-body">Nível sênior/staff. Projeta a arquitetura cloud de toda a empresa. Toma decisões de multi-cloud, design de rede, estratégia de disaster recovery, otimização de custo e padrões de segurança. Foco em visão estratégica, não em execução diária.</div>
+      <div class="card-tags"><span class="tag tag-pink">Arquitetura</span><span class="tag tag-blue">Multi-cloud</span><span class="tag tag-orange">Strategy</span></div>
+    </div>
+    <div class="card" style="--card-accent:var(--teal)">
+      <span class="card-icon">📐</span>
+      <div class="card-title">Solutions Architect</div>
+      <div class="card-body">Mais voltado a negócios. Une requisitos técnicos e de negócio. Projetam soluções completas para clientes ou produtos internos. Frequente em consultorias e CSPs como AWS. Requer forte comunicação e visão holística.</div>
+      <div class="card-tags"><span class="tag tag-teal">Business</span><span class="tag tag-green">Design</span><span class="tag tag-cyan">Presales</span></div>
+    </div>
+  </div>
+
+  <div class="divider"><div class="divider-line"></div><div class="divider-text">Mercado Brasil vs Exterior</div><div class="divider-line"></div></div>
+
+  <div class="cards-grid cards-grid-2">
+    <div class="card">
+      <span class="card-icon">🇧🇷</span>
+      <div class="card-title">Brasil — Estado do Mercado 2025</div>
+      <div class="card-body">O mercado brasileiro cresceu muito com transformação digital pós-pandemia. Fintechs (Nubank, iFood, PicPay), e-commerce (Mercado Livre, VTEX) e grandes bancos digitais lideram a demanda. São Paulo concentra 60% das vagas. Há escassez real de profissionais sênior em Kubernetes, Terraform e SRE — quem domina bem essas áreas tem altíssimo poder de negociação.<br><br>Contratação CLT ainda é dominante internamente. Remoto para empresas de fora do Brasil (PJ) tornou-se uma rota muito comum e bem remunerada.</div>
+      <div class="card-tags"><span class="tag tag-green">Alta demanda</span><span class="tag tag-orange">Fintechs</span><span class="tag tag-blue">Remote</span></div>
+    </div>
+    <div class="card">
+      <span class="card-icon">🌍</span>
+      <div class="card-title">Mercado Global 2025</div>
+      <div class="card-body">EUA lidera em salários e volume de vagas. Europa (Reino Unido, Alemanha, Holanda) cresceu muito e aceita brasileiros remotos. O mercado global paga em USD ou EUR, multiplicando os ganhos. Plataformas como Toptal, Deel, Remote.com e LinkedIn Internacional são portais de acesso. Inglês técnico fluente é o requisito mais crítico para entrada global.<br><br>Perfis valorizados globalmente: Kubernetes, Terraform, AWS/GCP, SRE, Platform Engineering e agora IA aplicada a infra.</div>
+      <div class="card-tags"><span class="tag tag-purple">USD/EUR</span><span class="tag tag-blue">Remote-first</span><span class="tag tag-cyan">LinkedIn</span></div>
+    </div>
+  </div>
+
+  <div class="divider"><div class="divider-line"></div><div class="divider-text">IA Transformando DevOps</div><div class="divider-line"></div></div>
+
+  <div class="cards-grid cards-grid-3">
+    <div class="card" style="--card-accent:var(--purple)">
+      <span class="card-icon">🤖</span>
+      <div class="card-title">O Que a IA Já Automatiza</div>
+      <div class="card-body">Geração de pipelines CI/CD básicos, IaC boilerplate, troubleshooting de logs com LLMs, análise de custo cloud, detecção de anomalias em métricas. Copilots (GitHub Copilot, Amazon Q Developer) aceleram muito a escrita de scripts e configs.</div>
+    </div>
+    <div class="card" style="--card-accent:var(--accent)">
+      <span class="card-icon">🧠</span>
+      <div class="card-title">O Que Permanece Humano</div>
+      <div class="card-body">Decisões arquiteturais complexas, incident response em situações críticas nunca antes vistas, design de plataformas, negociação de SLOs com negócio, cultura e liderança técnica. Pensamento sistêmico não tem substituto.</div>
+    </div>
+    <div class="card" style="--card-accent:var(--green)">
+      <span class="card-icon">📈</span>
+      <div class="card-title">Áreas que Mais Vão Crescer</div>
+      <div class="card-body">Platform Engineering, AI Infrastructure (MLOps/LLMOps), FinOps, Cloud Security, SRE em empresas mid-size, Edge Computing e observabilidade inteligente com IA.</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- SECTION 2: FUNDAMENTOS -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section id="fundamentos">
+<div class="container">
+  <div class="section-header">
+    <span class="section-num">02</span>
+    <div>
+      <div class="section-title">Fundamentos Absolutamente Essenciais</div>
+      <div class="section-desc">Base sólida que separa quem sobrevive de quem domina</div>
+    </div>
+  </div>
+
+  <div class="alert alert-info">
+    <span class="alert-icon">💡</span>
+    <div class="alert-body">Fundamentos fracos são o maior killer de carreira em DevOps. Você pode aprender Kubernetes rapidamente, mas sem entender redes, Linux e sistemas operacionais, você será eternamente limitado a seguir tutoriais sem entender o que está fazendo.</div>
+  </div>
+
+  <table class="data-table" style="background:var(--panel);border:1px solid var(--border);border-radius:12px;overflow:hidden;">
+    <thead>
+      <tr>
+        <th>Fundamento</th>
+        <th>O Que É</th>
+        <th>Por Que Importa</th>
+        <th>Prioridade</th>
+        <th>Dificuldade</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>🐧 Linux</strong></td>
+        <td>Sistema operacional base de toda infraestrutura cloud e servidores modernos</td>
+        <td>99% dos servidores rodam Linux. Sem Linux fluente, você não consegue operar nada</td>
+        <td><span class="badge badge-critical">Crítico</span></td>
+        <td>⭐⭐⭐</td>
+      </tr>
+      <tr>
+        <td><strong>🌐 Redes TCP/IP</strong></td>
+        <td>Fundamentos de como dados trafegam entre sistemas na internet e redes locais</td>
+        <td>Debugging de conectividade, design de VPCs, troubleshooting de micro serviços</td>
+        <td><span class="badge badge-critical">Crítico</span></td>
+        <td>⭐⭐⭐⭐</td>
+      </tr>
+      <tr>
+        <td><strong>🔗 DNS</strong></td>
+        <td>Sistema de resolução de nomes para endereços IP</td>
+        <td>Todo deploy envolve DNS. Falhas de DNS causam outages. É a base de service discovery</td>
+        <td><span class="badge badge-critical">Crítico</span></td>
+        <td>⭐⭐</td>
+      </tr>
+      <tr>
+        <td><strong>🔒 HTTP/HTTPS/TLS</strong></td>
+        <td>Protocolos de comunicação web com e sem criptografia</td>
+        <td>Entender headers, status codes, certs TLS é base para trabalhar com APIs, proxies e gateways</td>
+        <td><span class="badge badge-critical">Crítico</span></td>
+        <td>⭐⭐⭐</td>
+      </tr>
+      <tr>
+        <td><strong>🔑 SSH</strong></td>
+        <td>Protocolo de acesso remoto seguro</td>
+        <td>Acesso a servidores, chaves de deploy, Git, bastion hosts. Uso diário</td>
+        <td><span class="badge badge-critical">Crítico</span></td>
+        <td>⭐</td>
+      </tr>
+      <tr>
+        <td><strong>🐍 Python</strong></td>
+        <td>Linguagem de programação de alto nível e propósito geral</td>
+        <td>Automações, scripts, APIs, lambdas, ferramentas DevOps. A linguagem mais usada em infra</td>
+        <td><span class="badge badge-high">Alto</span></td>
+        <td>⭐⭐⭐</td>
+      </tr>
+      <tr>
+        <td><strong>💲 Bash/Shell</strong></td>
+        <td>Linguagem de script para automação no terminal Linux</td>
+        <td>Pipelines CI, scripts de inicialização, automação de tarefas repetitivas em servidores</td>
+        <td><span class="badge badge-critical">Crítico</span></td>
+        <td>⭐⭐</td>
+      </tr>
+      <tr>
+        <td><strong>📦 Git/GitHub</strong></td>
+        <td>Sistema de controle de versão distribuído + plataforma</td>
+        <td>Todo código e config vive em Git. Branching, PRs, GitOps são base do DevOps moderno</td>
+        <td><span class="badge badge-critical">Crítico</span></td>
+        <td>⭐⭐</td>
+      </tr>
+      <tr>
+        <td><strong>🗄️ Banco de Dados</strong></td>
+        <td>SQL (PostgreSQL, MySQL) e NoSQL (MongoDB, Redis, DynamoDB)</td>
+        <td>Entender backups, replicação, conexões e tunning é essencial em operações</td>
+        <td><span class="badge badge-high">Alto</span></td>
+        <td>⭐⭐⭐</td>
+      </tr>
+      <tr>
+        <td><strong>🔐 Segurança Básica</strong></td>
+        <td>Criptografia, IAM, secrets, princípio de menor privilégio</td>
+        <td>Cada configuração que você faz tem implicações de segurança. É transversal a tudo</td>
+        <td><span class="badge badge-high">Alto</span></td>
+        <td>⭐⭐⭐⭐</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- SECTION 3: ROADMAP TÉCNICO -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section id="roadmap-tech">
+<div class="container">
+  <div class="section-header">
+    <span class="section-num">03</span>
+    <div>
+      <div class="section-title">Roadmap Técnico Completo</div>
+      <div class="section-desc">Ordem correta de aprendizado com prioridades reais do mercado</div>
+    </div>
+  </div>
+
+  <div style="background:var(--panel);border:1px solid var(--border);border-radius:16px;overflow-x:auto;padding:32px;">
+    <div class="roadmap-flow">
+      <div class="flow-phase">
+        <div class="flow-phase-label phase-starter">🌱 Fundamentos</div>
+        <div class="flow-item"><div class="flow-dot" style="background:var(--green)"></div>Linux & Terminal</div>
+        <div class="flow-item"><div class="flow-dot" style="background:var(--green)"></div>Redes TCP/IP & DNS</div>
+        <div class="flow-item"><div class="flow-dot" style="background:var(--green)"></div>HTTP/HTTPS/SSH</div>
+        <div class="flow-item"><div class="flow-dot" style="background:var(--green)"></div>Git & GitHub</div>
+        <div class="flow-item"><div class="flow-dot" style="background:var(--green)"></div>Bash Scripting</div>
+        <div class="flow-item"><div class="flow-dot" style="background:var(--green)"></div>Python Básico</div>
+        <div class="flow-item"><div class="flow-dot" style="background:var(--green)"></div>SQL Básico</div>
+      </div>
+      <div class="flow-phase">
+        <div class="flow-phase-label phase-junior">🔵 Júnior (6-12m)</div>
+        <div class="flow-item"><div class="flow-dot" style="background:var(--accent)"></div>Docker & Containers</div>
+        <div class="flow-item"><div class="flow-dot" style="background:var(--accent)"></div>Cloud Básico (AWS/GCP)</div>
+        <div class="flow-item"><div class="flow-dot" style="background:var(--accent)"></div>CI/CD Básico</div>
+        <div class="flow-item"><div class="flow-dot" style="background:var(--accent)"></div>Terraform Intro</div>
+        <div class="flow-item"><div class="flow-dot" style="background:var(--accent)"></div>Kubernetes Básico</div>
+        <div class="flow-item"><div class="flow-dot" style="background:var(--accent)"></div>Monitoramento Básico</div>
+        <div class="flow-item"><div class="flow-dot" style="background:var(--accent)"></div>GitHub Actions</div>
+      </div>
+      <div class="flow-phase">
+        <div class="flow-phase-label phase-mid">🟡 Pleno (1-2 anos)</div>
+        <div class="flow-item"><div class="flow-dot" style="background:var(--orange)"></div>Kubernetes Avançado</div>
+        <div class="flow-item"><div class="flow-dot" style="background:var(--orange)"></div>Helm & GitOps</div>
+        <div class="flow-item"><div class="flow-dot" style="background:var(--orange)"></div>Terraform Avançado</div>
+        <div class="flow-item"><div class="flow-dot" style="background:var(--orange)"></div>Observabilidade Full</div>
+        <div class="flow-item"><div class="flow-dot" style="background:var(--orange)"></div>Cloud Profundo</div>
+        <div class="flow-item"><div class="flow-dot" style="background:var(--orange)"></div>Service Mesh</div>
+        <div class="flow-item"><div class="flow-dot" style="background:var(--orange)"></div>DevSecOps Básico</div>
+      </div>
+      <div class="flow-phase">
+        <div class="flow-phase-label phase-senior">🟣 Sênior (2-4 anos)</div>
+        <div class="flow-item"><div class="flow-dot" style="background:var(--purple)"></div>SRE Practices</div>
+        <div class="flow-item"><div class="flow-dot" style="background:var(--purple)"></div>Multi-cloud</div>
+        <div class="flow-item"><div class="flow-dot" style="background:var(--purple)"></div>Platform Engineering</div>
+        <div class="flow-item"><div class="flow-dot" style="background:var(--purple)"></div>Security em Profundidade</div>
+        <div class="flow-item"><div class="flow-dot" style="background:var(--purple)"></div>Chaos Engineering</div>
+        <div class="flow-item"><div class="flow-dot" style="background:var(--purple)"></div>FinOps</div>
+        <div class="flow-item"><div class="flow-dot" style="background:var(--purple)"></div>Go Language</div>
+      </div>
+      <div class="flow-phase">
+        <div class="flow-phase-label phase-elite">🌟 Elite/Global</div>
+        <div class="flow-item"><div class="flow-dot" style="background:var(--pink)"></div>Cloud Architecture</div>
+        <div class="flow-item"><div class="flow-dot" style="background:var(--pink)"></div>AI Infra / MLOps</div>
+        <div class="flow-item"><div class="flow-dot" style="background:var(--pink)"></div>Distributed Systems</div>
+        <div class="flow-item"><div class="flow-dot" style="background:var(--pink)"></div>Internal Dev Platform</div>
+        <div class="flow-item"><div class="flow-dot" style="background:var(--pink)"></div>Leadership Técnica</div>
+        <div class="flow-item"><div class="flow-dot" style="background:var(--pink)"></div>Contribuição Open Source</div>
+        <div class="flow-item"><div class="flow-dot" style="background:var(--pink)"></div>Especialização Deep</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"><div class="divider-line"></div><div class="divider-text">O que está ultrapassado vs moderno</div><div class="divider-line"></div></div>
+
+  <div class="cards-grid cards-grid-2">
+    <div class="card" style="--card-accent:var(--red)">
+      <span class="card-icon">⚰️</span>
+      <div class="card-title">Evitar / Ultrapassado</div>
+      <div class="card-body">
+        <div class="checklist">
+          <div class="check-item done"><div class="check-box">✗</div>Jenkins como ferramenta principal de CI/CD</div>
+          <div class="check-item done"><div class="check-box">✗</div>Ansible como solução primária de IaC</div>
+          <div class="check-item done"><div class="check-box">✗</div>VMs para tudo (sem containers)</div>
+          <div class="check-item done"><div class="check-box">✗</div>Monitoramento só com Nagios/Zabbix</div>
+          <div class="check-item done"><div class="check-box">✗</div>Deploys manuais sem pipeline</div>
+          <div class="check-item done"><div class="check-box">✗</div>Chef/Puppet como foco principal</div>
+        </div>
+      </div>
+    </div>
+    <div class="card" style="--card-accent:var(--green)">
+      <span class="card-icon">🚀</span>
+      <div class="card-title">O Mercado Valoriza Hoje</div>
+      <div class="card-body">
+        <div class="checklist">
+          <div class="check-item"><div class="check-box"></div>GitHub Actions / GitLab CI modernos</div>
+          <div class="check-item"><div class="check-box"></div>Terraform + ArgoCD (GitOps)</div>
+          <div class="check-item"><div class="check-box"></div>Kubernetes em produção real</div>
+          <div class="check-item"><div class="check-box"></div>Observabilidade com Grafana + OTEL</div>
+          <div class="check-item"><div class="check-box"></div>Platform Engineering / IDPs</div>
+          <div class="check-item"><div class="check-box"></div>Security-first / Zero Trust</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- SECTION 4: LINUX -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section id="linux">
+<div class="container">
+  <div class="section-header">
+    <span class="section-num">04</span>
+    <div>
+      <div class="section-title">Linux & Sistemas</div>
+      <div class="section-desc">O alicerce de toda a infraestrutura moderna</div>
+    </div>
+  </div>
+
+  <div class="cards-grid cards-grid-3">
+    <div class="card" style="--card-accent:var(--orange)">
+      <span class="card-icon">🖥️</span>
+      <div class="card-title">Terminal & Bash</div>
+      <div class="card-body">Navegação com find, grep, awk, sed, cut, sort, xargs. Pipes e redirecionamentos. Shell scripting com loops, condicionais, funções e tratamento de erros. Variáveis de ambiente e .bashrc/.zshrc.</div>
+      <div class="diff-bar"><div class="diff-label">Prioridade</div><div class="diff-track"><div class="diff-fill" style="width:100%;background:var(--red)"></div></div></div>
+    </div>
+    <div class="card" style="--card-accent:var(--accent)">
+      <span class="card-icon">⚙️</span>
+      <div class="card-title">Processos & Systemd</div>
+      <div class="card-body">ps, top, htop, kill, nice, nohup. Systemd: systemctl, journalctl, criação de unit files. Init systems. Signals (SIGTERM, SIGKILL). Daemon management. Cron e agendamento de tarefas.</div>
+      <div class="diff-bar"><div class="diff-label">Prioridade</div><div class="diff-track"><div class="diff-fill" style="width:95%;background:var(--red)"></div></div></div>
+    </div>
+    <div class="card" style="--card-accent:var(--purple)">
+      <span class="card-icon">🔑</span>
+      <div class="card-title">Permissões & Segurança</div>
+      <div class="card-body">chmod, chown, umask. SUID/SGID. ACLs. Sudoers. PAM. SSH hardening. Firewall com iptables/nftables. SELinux e AppArmor básico. Auditd para logging de segurança.</div>
+      <div class="diff-bar"><div class="diff-label">Prioridade</div><div class="diff-track"><div class="diff-fill" style="width:90%;background:var(--orange)"></div></div></div>
+    </div>
+    <div class="card" style="--card-accent:var(--green)">
+      <span class="card-icon">📊</span>
+      <div class="card-title">Performance & Monitoring</div>
+      <div class="card-body">vmstat, iostat, sar, dstat, perf. /proc e /sys filesystem. Load average e o que significa. Memory: free, /proc/meminfo. Identificar e resolver CPU, I/O e memory bottlenecks em produção.</div>
+      <div class="diff-bar"><div class="diff-label">Prioridade</div><div class="diff-track"><div class="diff-fill" style="width:85%;background:var(--orange)"></div></div></div>
+    </div>
+    <div class="card" style="--card-accent:var(--cyan)">
+      <span class="card-icon">📁</span>
+      <div class="card-title">Filesystems & Storage</div>
+      <div class="card-body">ext4, XFS, ZFS básico. LVM (volumes lógicos). Mount, fstab. df, du, lsblk. NFS e CIFS. Disk I/O tuning. Backups com rsync e tar. inode exhaustion.</div>
+      <div class="diff-bar"><div class="diff-label">Prioridade</div><div class="diff-track"><div class="diff-fill" style="width:75%;background:var(--accent)"></div></div></div>
+    </div>
+    <div class="card" style="--card-accent:var(--teal)">
+      <span class="card-icon">📋</span>
+      <div class="card-title">Logs & Troubleshooting</div>
+      <div class="card-body">journalctl, /var/log/*, syslog, rsyslog. tail -f, grep em logs grandes. Debugging com strace e ltrace. lsof para arquivos abertos. ss/netstat para conexões de rede. tcpdump básico.</div>
+      <div class="diff-bar"><div class="diff-label">Prioridade</div><div class="diff-track"><div class="diff-fill" style="width:95%;background:var(--red)"></div></div></div>
+    </div>
+  </div>
+
+  <div class="divider"><div class="divider-line"></div><div class="divider-text">Distribuições Relevantes</div><div class="divider-line"></div></div>
+  <div style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:24px;">
+    <span class="skill-pill">🐧 Ubuntu/Debian — ambientes dev e cloud</span>
+    <span class="skill-pill">🎩 RHEL/CentOS/Rocky — enterprise e produção</span>
+    <span class="skill-pill">🦎 Amazon Linux 2/2023 — AWS nativo</span>
+    <span class="skill-pill">📦 Alpine — containers Docker</span>
+    <span class="skill-pill">🔥 Arch — homelab e aprendizado avançado</span>
+  </div>
+
+  <div class="code-block"><span class="code-comment"># Comandos que você deve dominar de cor</span>
+<span class="code-keyword">find</span> /var/log -name "*.log" -mtime -7 | <span class="code-keyword">xargs</span> grep -l "ERROR"
+<span class="code-keyword">ss</span> -tlnp | grep <span class="code-string">":80\|:443\|:8080"</span>
+<span class="code-keyword">journalctl</span> -u nginx --since "1 hour ago" -f
+<span class="code-keyword">ps</span> aux --sort=-%cpu | head -10
+<span class="code-keyword">lsof</span> -i :3000         <span class="code-comment"># quem está usando a porta 3000</span>
+<span class="code-keyword">awk</span> '{print $1}' /var/log/nginx/access.log | sort | uniq -c | sort -nr | head</div>
+</div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- SECTION 5: REDES -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section id="redes">
+<div class="container">
+  <div class="section-header">
+    <span class="section-num">05</span>
+    <div>
+      <div class="section-title">Redes & Infraestrutura</div>
+      <div class="section-desc">Entender redes é entender por que as coisas falham — e como consertar</div>
+    </div>
+  </div>
+
+  <div class="cards-grid cards-grid-2">
+    <div class="card" style="--card-accent:var(--blue)">
+      <span class="card-icon">🌐</span>
+      <div class="card-title">TCP/IP Profundo</div>
+      <div class="card-body"><strong>Modelo OSI e TCP/IP:</strong> Entenda cada camada e o que acontece em cada uma. <strong>Subnetting:</strong> CIDR, máscaras, roteamento. Como calcular /24, /16, /28 mentalmente. <strong>TCP vs UDP:</strong> handshake, flags, estados de conexão. <strong>Ferramentas:</strong> ping, traceroute, mtr, tcpdump, wireshark básico, nmap básico.</div>
+      <div class="card-tags"><span class="tag tag-blue">OSI</span><span class="tag tag-cyan">CIDR</span><span class="tag tag-green">TCP/UDP</span></div>
+    </div>
+    <div class="card" style="--card-accent:var(--orange)">
+      <span class="card-icon">🔍</span>
+      <div class="card-title">DNS Avançado</div>
+      <div class="card-body">Tipos de registro: A, AAAA, CNAME, MX, TXT, SRV, PTR. TTL e caching. Hierarquia de resolução. Zonas e delegation. DNS split-horizon para multi-env. Route53 (AWS), Cloud DNS (GCP). Service discovery via DNS em Kubernetes.</div>
+      <div class="card-tags"><span class="tag tag-orange">Records</span><span class="tag tag-blue">Route53</span><span class="tag tag-purple">Kubernetes</span></div>
+    </div>
+    <div class="card" style="--card-accent:var(--green)">
+      <span class="card-icon">⚖️</span>
+      <div class="card-title">Load Balancers</div>
+      <div class="card-body"><strong>L4 (TCP):</strong> NLB da AWS, HAProxy modo TCP. <strong>L7 (HTTP):</strong> ALB, Nginx, Traefik. <strong>Algoritmos:</strong> round-robin, least-connections, IP hash. Health checks. Sticky sessions. TLS termination. Métricas de LB essenciais para debugging.</div>
+      <div class="card-tags"><span class="tag tag-green">L4/L7</span><span class="tag tag-cyan">ALB/NLB</span><span class="tag tag-orange">Nginx</span></div>
+    </div>
+    <div class="card" style="--card-accent:var(--purple)">
+      <span class="card-icon">🔐</span>
+      <div class="card-title">VPN, Proxy & Segurança</div>
+      <div class="card-body"><strong>VPN:</strong> OpenVPN, WireGuard, AWS VPN. <strong>Proxy:</strong> Forward proxy, reverse proxy. <strong>Firewall:</strong> Stateful vs stateless. Security groups (AWS) vs NSGs (Azure). <strong>NAT:</strong> SNAT, DNAT, PAT. <strong>CDN:</strong> CloudFront, Cloudflare, edge caching.</div>
+      <div class="card-tags"><span class="tag tag-purple">VPN</span><span class="tag tag-red">Firewall</span><span class="tag tag-cyan">CDN</span></div>
+    </div>
+    <div class="card" style="--card-accent:var(--cyan)">
+      <span class="card-icon">☁️</span>
+      <div class="card-title">Redes em Cloud</div>
+      <div class="card-body"><strong>VPC:</strong> Subnets públicas e privadas, route tables, internet gateway, NAT gateway. <strong>Peering e Transit:</strong> VPC Peering, Transit Gateway. <strong>Endpoints:</strong> Acesso privado a serviços sem sair da VPC. <strong>Security Groups + NACLs.</strong> PrivateLink.</div>
+      <div class="card-tags"><span class="tag tag-cyan">VPC</span><span class="tag tag-blue">Subnets</span><span class="tag tag-teal">Peering</span></div>
+    </div>
+    <div class="card" style="--card-accent:var(--teal)">
+      <span class="card-icon">🌍</span>
+      <div class="card-title">Arquitetura de Rede</div>
+      <div class="card-body">Hub-and-spoke vs full mesh. Multi-region routing. Latência e its causas. BGP básico para entender routing na internet. Zero-trust networking (BeyondCorp model). Network policies no Kubernetes. Service mesh como Istio para comunicação segura entre serviços.</div>
+      <div class="card-tags"><span class="tag tag-teal">Multi-region</span><span class="tag tag-purple">Zero Trust</span><span class="tag tag-green">Service Mesh</span></div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- SECTION 6: CLOUD -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section id="cloud">
+<div class="container">
+  <div class="section-header">
+    <span class="section-num">06</span>
+    <div>
+      <div class="section-title">Cloud Computing</div>
+      <div class="section-desc">AWS, Azure e GCP — serviços, mercado, certificações e estratégias</div>
+    </div>
+  </div>
+
+  <div class="alert alert-warn">
+    <span class="alert-icon">⚡</span>
+    <div class="alert-body"><strong>Estratégia recomendada:</strong> Comece com AWS (maior mercado e comunidade). Aprenda os conceitos uma vez, eles se traduzem para Azure e GCP. Depois de sólido em uma cloud, o aprendizado das demais é 3-4x mais rápido.</div>
+  </div>
+
+  <div class="cards-grid cards-grid-3">
+    <!-- AWS -->
+    <div class="card" style="--card-accent:var(--orange)">
+      <span class="card-icon">🟠</span>
+      <div class="card-title">Amazon Web Services (AWS)</div>
+      <div class="card-body">
+        <strong>Compute:</strong> EC2, Lambda, ECS, EKS, Fargate<br>
+        <strong>Storage:</strong> S3, EBS, EFS, Glacier<br>
+        <strong>Database:</strong> RDS, Aurora, DynamoDB, ElastiCache<br>
+        <strong>Networking:</strong> VPC, Route53, CloudFront, ALB/NLB<br>
+        <strong>IAM:</strong> Users, Roles, Policies, SCP<br>
+        <strong>CI/CD:</strong> CodePipeline, CodeBuild, CodeDeploy<br>
+        <strong>Observabilidade:</strong> CloudWatch, X-Ray, AWS Config<br>
+        <strong>Segurança:</strong> GuardDuty, SecurityHub, WAF, Secrets Manager
+      </div>
+      <div class="card-tags"><span class="tag tag-orange">Maior mercado</span><span class="tag tag-green">~32% share</span></div>
+    </div>
+    <!-- GCP -->
+    <div class="card" style="--card-accent:var(--accent)">
+      <span class="card-icon">🔵</span>
+      <div class="card-title">Google Cloud Platform (GCP)</div>
+      <div class="card-body">
+        <strong>Compute:</strong> Compute Engine, GKE, Cloud Run, Cloud Functions<br>
+        <strong>Storage:</strong> GCS, Persistent Disk, Filestore<br>
+        <strong>Database:</strong> Cloud SQL, Spanner, Bigtable, Firestore<br>
+        <strong>Networking:</strong> VPC, Cloud Load Balancing, Cloud CDN<br>
+        <strong>AI/ML:</strong> Vertex AI, BigQuery ML (forte vantagem)<br>
+        <strong>Observabilidade:</strong> Cloud Monitoring, Cloud Logging, Trace<br>
+        <strong>Destaque:</strong> Melhor Kubernetes (criaram o K8s), forte em IA
+      </div>
+      <div class="card-tags"><span class="tag tag-blue">Melhor em IA/ML</span><span class="tag tag-cyan">~12% share</span></div>
+    </div>
+    <!-- Azure -->
+    <div class="card" style="--card-accent:var(--cyan)">
+      <span class="card-icon">🔷</span>
+      <div class="card-title">Microsoft Azure</div>
+      <div class="card-body">
+        <strong>Compute:</strong> Virtual Machines, AKS, App Service, Azure Functions<br>
+        <strong>Storage:</strong> Blob Storage, Azure Files, Managed Disks<br>
+        <strong>Database:</strong> Azure SQL, Cosmos DB, Cache for Redis<br>
+        <strong>Networking:</strong> VNet, Azure Load Balancer, Azure DNS<br>
+        <strong>IAM:</strong> Azure AD / Entra ID (forte integração enterprise)<br>
+        <strong>DevOps:</strong> Azure DevOps, GitHub Actions<br>
+        <strong>Destaque:</strong> Dominante em enterprise, Microsoft shops
+      </div>
+      <div class="card-tags"><span class="tag tag-cyan">Enterprise</span><span class="tag tag-purple">~23% share</span></div>
+    </div>
+  </div>
+
+  <div class="divider"><div class="divider-line"></div><div class="divider-text">Modelos de Cloud</div><div class="divider-line"></div></div>
+
+  <div class="cards-grid cards-grid-4">
+    <div class="card" style="--card-accent:var(--green)">
+      <span class="card-icon">🏭</span>
+      <div class="card-title">Multi-cloud</div>
+      <div class="card-body">Usar 2+ providers para evitar vendor lock-in, disaster recovery e otimização de custo. Complexidade alta. Ferramentas: Terraform abstrai providers. Kubernetes permite portabilidade de workloads.</div>
+    </div>
+    <div class="card" style="--card-accent:var(--purple)">
+      <span class="card-icon">🔀</span>
+      <div class="card-title">Hybrid Cloud</div>
+      <div class="card-body">Cloud pública + on-premises. Comum em grandes enterprises com dados sensíveis ou legado. Conectividade via VPN ou Direct Connect. Latência é o desafio principal.</div>
+    </div>
+    <div class="card" style="--card-accent:var(--accent)">
+      <span class="card-icon">⚡</span>
+      <div class="card-title">Serverless</div>
+      <div class="card-body">Lambda, Cloud Functions, Cloud Run. Zero gestão de infra. Pagamento por execução. Ideal para event-driven, APIs ocasionais. Desafios: cold start, vendor lock-in, observabilidade.</div>
+    </div>
+    <div class="card" style="--card-accent:var(--orange)">
+      <span class="card-icon">🌏</span>
+      <div class="card-title">Edge Computing</div>
+      <div class="card-body">Processamento próximo ao usuário final. CloudFront, Cloudflare Workers, Fastly. Reduz latência para IoT e apps de tempo-real. Tendência crescente com 5G e IA no edge.</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- SECTION 7: CONTAINERS -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section id="containers">
+<div class="container">
+  <div class="section-header">
+    <span class="section-num">07</span>
+    <div>
+      <div class="section-title">Containers & Orquestração</div>
+      <div class="section-desc">Docker e Kubernetes — o coração da infraestrutura moderna</div>
+    </div>
+  </div>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-label">Passo 1 — Base</div>
+      <div class="tl-title">🐳 Docker — Domine Primeiro</div>
+      <div class="tl-body">
+        <strong>O que é:</strong> Tecnologia de containerização que empacota uma aplicação com todas suas dependências em uma imagem portátil.<br><br>
+        <strong>O que dominar:</strong> Dockerfile (multi-stage builds, camadas, cache), docker-compose para local dev, redes Docker (bridge, host, overlay), volumes, registries (DockerHub, ECR, GCR). Entender namespaces e cgroups que estão por baixo. Segurança: rodar sem root, imagens mínimas (alpine), scanning com trivy.<br><br>
+        <div class="card-tags"><span class="tag tag-blue">Dockerfile</span><span class="tag tag-green">Compose</span><span class="tag tag-orange">Registries</span><span class="tag tag-red">Security</span></div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-label">Passo 2 — Orquestração</div>
+      <div class="tl-title">⛵ Kubernetes — O Padrão da Indústria</div>
+      <div class="tl-body">
+        <strong>Objetos essenciais:</strong> Pod, Deployment, Service, ConfigMap, Secret, Ingress, PersistentVolume, HPA, Namespace.<br><br>
+        <strong>Redes K8s:</strong> CNI plugins (Calico, Flannel, Cilium), kube-proxy, CoreDNS, NodePort vs ClusterIP vs LoadBalancer.<br><br>
+        <strong>Armazenamento:</strong> PVC, StorageClass, CSI drivers.<br><br>
+        <strong>Operações:</strong> kubectl avançado, rolling updates, drain/cordon de nodes, RBAC, Network Policies, Resource Limits/Requests.<br><br>
+        <strong>Distribuições:</strong> EKS (AWS), GKE (GCP), AKS (Azure), k3s (local/edge), kind (local dev).<br><br>
+        <div class="card-tags"><span class="tag tag-blue">Pods</span><span class="tag tag-green">Services</span><span class="tag tag-orange">RBAC</span><span class="tag tag-purple">HPA</span><span class="tag tag-cyan">Ingress</span></div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-label">Passo 3 — Avançado</div>
+      <div class="tl-title">⛵ Helm, GitOps & Service Mesh</div>
+      <div class="tl-body">
+        <strong>Helm:</strong> Package manager para Kubernetes. Charts, values, templates, releases. Helmfile para gerenciar múltiplos charts.<br><br>
+        <strong>ArgoCD / FluxCD:</strong> GitOps — o repositório Git é a fonte de verdade. Deploys automáticos quando há mudança no Git. Padrão crescente em produção.<br><br>
+        <strong>Istio / Linkerd:</strong> Service Mesh. mTLS entre serviços, traffic management (canary, A/B), observabilidade de malha. Istio é mais poderoso, Linkerd é mais simples.<br><br>
+        <div class="card-tags"><span class="tag tag-orange">Helm</span><span class="tag tag-green">ArgoCD</span><span class="tag tag-purple">GitOps</span><span class="tag tag-blue">Istio</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- SECTION 8: CI/CD -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section id="cicd">
+<div class="container">
+  <div class="section-header">
+    <span class="section-num">08</span>
+    <div>
+      <div class="section-title">CI/CD & Automação</div>
+      <div class="section-desc">Pipelines que entregam software com velocidade e confiança</div>
+    </div>
+  </div>
+
+  <div class="big-banner">
+    <h3>🔄 O que é CI/CD na prática?</h3>
+    <p><strong>CI (Continuous Integration):</strong> Toda vez que um dev faz push, rodam testes automáticos, lint, build e verificações de qualidade. Detecta erros cedo. <strong>CD (Continuous Delivery/Deploy):</strong> Após CI verde, o código pode ser (delivery) ou é automaticamente (deploy) enviado para produção.</p>
+  </div>
+
+  <table class="data-table" style="background:var(--panel);border:1px solid var(--border);border-radius:12px;overflow:hidden;">
+    <thead>
+      <tr><th>Ferramenta</th><th>Quando Usar</th><th>Mercado</th><th>Aprender?</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>GitHub Actions</strong></td>
+        <td>Projetos no GitHub, open source, startups, empresas modernas</td>
+        <td>🚀 Crescendo muito — padrão atual</td>
+        <td><span class="badge badge-critical">Sim — prioridade</span></td>
+      </tr>
+      <tr>
+        <td><strong>GitLab CI</strong></td>
+        <td>Empresas com GitLab self-hosted, bancos, telcos, governo</td>
+        <td>📈 Forte em enterprise e Europa</td>
+        <td><span class="badge badge-high">Sim</span></td>
+      </tr>
+      <tr>
+        <td><strong>ArgoCD</strong></td>
+        <td>CD contínuo em Kubernetes via GitOps</td>
+        <td>🔥 Padrão crescente em K8s</td>
+        <td><span class="badge badge-critical">Sim — essencial</span></td>
+      </tr>
+      <tr>
+        <td><strong>Jenkins</strong></td>
+        <td>Empresas com legado, workflows complexos já existentes</td>
+        <td>📉 Legado mas ainda comum no Brasil</td>
+        <td><span class="badge badge-medium">Saber o básico</span></td>
+      </tr>
+      <tr>
+        <td><strong>Tekton</strong></td>
+        <td>CI/CD nativo em Kubernetes — pipelines como CRDs</td>
+        <td>📈 Crescendo em K8s-native</td>
+        <td><span class="badge badge-nice">Diferencial</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="divider"><div class="divider-line"></div><div class="divider-text">Estratégias de Deploy</div><div class="divider-line"></div></div>
+
+  <div class="cards-grid cards-grid-3">
+    <div class="card" style="--card-accent:var(--blue)">
+      <span class="card-icon">🔵🟢</span>
+      <div class="card-title">Blue/Green Deploy</div>
+      <div class="card-body">Dois ambientes idênticos. Blue = atual produção. Green = nova versão. Ao validar Green, o tráfego é chaveado instantaneamente. Rollback imediato é só voltar o switch. Alto custo de infra (duplo recurso), mas risco zero de downtime.</div>
+    </div>
+    <div class="card" style="--card-accent:var(--yellow)">
+      <span class="card-icon">🐦</span>
+      <div class="card-title">Canary Deploy</div>
+      <div class="card-body">Envia 1-5% do tráfego para a nova versão primeiro. Monitora métricas de erro e latência. Vai aumentando gradualmente (5% → 25% → 100%). Se algo errar, só afeta pequena fração de usuários. Padrão no Google, Netflix, Uber.</div>
+    </div>
+    <div class="card" style="--card-accent:var(--green)">
+      <span class="card-icon">🔄</span>
+      <div class="card-title">Rolling Update</div>
+      <div class="card-body">Atualiza pods/instâncias gradualmente, mantendo capacidade. Padrão do Kubernetes (estratégia default). Simples mas rollback pode ser complexo. Bom para maioria dos casos sem custo extra de infra.</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- SECTION 9: IAC -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section id="iac">
+<div class="container">
+  <div class="section-header">
+    <span class="section-num">09</span>
+    <div>
+      <div class="section-title">Infraestrutura como Código (IaC)</div>
+      <div class="section-desc">Infraestrutura versionada, reproduzível e auditável</div>
+    </div>
+  </div>
+
+  <div class="cards-grid cards-grid-2">
+    <div class="card" style="--card-accent:var(--purple)">
+      <span class="card-icon">🔧</span>
+      <div class="card-title">Terraform — O Padrão da Indústria</div>
+      <div class="card-body">
+        <strong>O que é:</strong> IaC declarativo multi-cloud da HashiCorp. Define o estado desejado da infra em HCL (HashiCorp Configuration Language).<br><br>
+        <strong>O que dominar:</strong> Providers, resources, data sources, variables, outputs, modules, state (local vs remoto no S3/GCS), workspaces, import de recursos existentes.<br><br>
+        <strong>Avançado:</strong> Terragrunt para DRY configs, Atlantis para GitOps com Terraform, Terraform Cloud/Enterprise, migração de state, taint e targeted applies.<br><br>
+        <strong>Alternativa moderna:</strong> OpenTofu (fork open-source após mudança de licença da HashiCorp)
+      </div>
+      <div class="card-tags"><span class="tag tag-purple">HCL</span><span class="tag tag-blue">Multi-cloud</span><span class="tag tag-orange">Módulos</span><span class="tag tag-green">State</span></div>
+    </div>
+    <div class="card" style="--card-accent:var(--red)">
+      <span class="card-icon">⚡</span>
+      <div class="card-title">Ansible — Automação de Configuração</div>
+      <div class="card-body">
+        <strong>O que é:</strong> Ferramenta de automação de configuração agentless (usa SSH). Ideal para configurar servidores, não para provisionar infra cloud.<br><br>
+        <strong>O que dominar:</strong> Playbooks, roles, inventory, módulos built-in, templates Jinja2, handlers, variáveis e secrets com vault.<br><br>
+        <strong>Quando usar:</strong> Configuração de VMs, bare metal, deploys de aplicação, bootstrapping de servidores. Não é o melhor para Kubernetes ou Cloud — use Terraform para isso.<br><br>
+        <strong>Status 2025:</strong> Ainda usado em enterprises com VM-heavy workload. Menos relevante em cloud-native.
+      </div>
+      <div class="card-tags"><span class="tag tag-red">Agentless</span><span class="tag tag-orange">Playbooks</span><span class="tag tag-purple">SSH</span></div>
+    </div>
+    <div class="card" style="--card-accent:var(--accent)">
+      <span class="card-icon">🐍</span>
+      <div class="card-title">Pulumi — IaC com Linguagens Reais</div>
+      <div class="card-body">
+        <strong>O que é:</strong> IaC usando linguagens de programação reais (Python, Go, TypeScript, .NET). Alternativa ao Terraform para devs que preferem código sobre DSL.<br><br>
+        <strong>Vantagem:</strong> Loops reais, abstração orientada a objetos, testes unitários de infra, melhor IDE support.<br><br>
+        <strong>Status 2025:</strong> Crescendo, especialmente em times de engenharia que preferem TypeScript/Python. Boa escolha para Platform Engineering.
+      </div>
+      <div class="card-tags"><span class="tag tag-blue">TypeScript</span><span class="tag tag-green">Python</span><span class="tag tag-cyan">Go</span></div>
+    </div>
+    <div class="card" style="--card-accent:var(--orange)">
+      <span class="card-icon">🏗️</span>
+      <div class="card-title">CloudFormation & CDK</div>
+      <div class="card-body">
+        <strong>CloudFormation:</strong> IaC nativo da AWS em YAML/JSON. Verboso mas integrado nativamente. Útil para recursos AWS-specific.<br><br>
+        <strong>AWS CDK:</strong> Define CloudFormation com Python, TypeScript, Java. Boa alternativa ao Pulumi dentro do ecossistema AWS.<br><br>
+        <strong>Quando usar:</strong> Times 100% AWS que preferem não depender de Terraform. Não é multi-cloud.
+      </div>
+      <div class="card-tags"><span class="tag tag-orange">AWS-native</span><span class="tag tag-blue">CDK</span><span class="tag tag-green">YAML</span></div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- SECTION 10: OBSERVABILIDADE -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section id="observabilidade">
+<div class="container">
+  <div class="section-header">
+    <span class="section-num">10</span>
+    <div>
+      <div class="section-title">Observabilidade & Monitoramento</div>
+      <div class="section-desc">Os três pilares: Logs, Métricas e Traces</div>
+    </div>
+  </div>
+
+  <div class="cards-grid cards-grid-3">
+    <div class="card" style="--card-accent:var(--orange)">
+      <span class="card-icon">📝</span>
+      <div class="card-title">Logs — O Que Aconteceu</div>
+      <div class="card-body">Registros de eventos discretos ao longo do tempo. <strong>Stack ELK:</strong> Elasticsearch + Logstash + Kibana. <strong>Stack Loki:</strong> Grafana Loki + Promtail (mais leve, recomendado em K8s). Structured logging (JSON). Log levels corretos. Não logar dados sensíveis. Log aggregation em produção.</div>
+      <div class="card-tags"><span class="tag tag-orange">ELK</span><span class="tag tag-green">Loki</span><span class="tag tag-blue">Structured</span></div>
+    </div>
+    <div class="card" style="--card-accent:var(--red)">
+      <span class="card-icon">📊</span>
+      <div class="card-title">Métricas — O Estado do Sistema</div>
+      <div class="card-body">Valores numéricos ao longo do tempo. <strong>Prometheus:</strong> Padrão open-source. PromQL para queries. Alertmanager para alertas. <strong>Grafana:</strong> Dashboards. <strong>4 Golden Signals do Google:</strong> Latência, Tráfego, Erros, Saturação. RED (Rate, Errors, Duration) para serviços. USE (Utilization, Saturation, Errors) para recursos.</div>
+      <div class="card-tags"><span class="tag tag-red">Prometheus</span><span class="tag tag-orange">Grafana</span><span class="tag tag-purple">PromQL</span></div>
+    </div>
+    <div class="card" style="--card-accent:var(--purple)">
+      <span class="card-icon">🔗</span>
+      <div class="card-title">Tracing — O Caminho de um Request</div>
+      <div class="card-body">Rastreamento distribuído de uma requisição através de múltiplos serviços. <strong>OpenTelemetry (OTEL):</strong> Padrão da indústria — vendor-neutral. <strong>Jaeger / Tempo:</strong> Backends de trace. <strong>Spans e traces:</strong> Identificar gargalos entre microserviços. Correlacionar logs + métricas + traces (observabilidade completa).</div>
+      <div class="card-tags"><span class="tag tag-purple">OpenTelemetry</span><span class="tag tag-blue">Jaeger</span><span class="tag tag-green">Spans</span></div>
+    </div>
+    <div class="card" style="--card-accent:var(--accent)">
+      <span class="card-icon">🐕</span>
+      <div class="card-title">Datadog — Plataforma Comercial</div>
+      <div class="card-body">Solução comercial all-in-one de observabilidade. Logs, APM, métricas, tracing, profiling, RUM. Muito usado em empresas maiores que pagam pelo conforto. Forte integração cloud-native. Custo pode ser alto em escala — importante saber controlar cardinality.</div>
+      <div class="card-tags"><span class="tag tag-blue">APM</span><span class="tag tag-purple">All-in-one</span><span class="tag tag-orange">Custo</span></div>
+    </div>
+    <div class="card" style="--card-accent:var(--green)">
+      <span class="card-icon">🚨</span>
+      <div class="card-title">Alertas & Incident Response</div>
+      <div class="card-body"><strong>Alertas úteis:</strong> Alertar no sintoma (usuário afetado), não na causa (CPU alto). <strong>PagerDuty / OpsGenie:</strong> Gestão de on-call. <strong>SLA de resposta:</strong> P1 em minutos, P2 em horas. <strong>Runbooks:</strong> Documentação de como resolver problemas comuns. <strong>Postmortem blameless:</strong> Cultura de aprendizado sem punição.</div>
+      <div class="card-tags"><span class="tag tag-green">Alertas</span><span class="tag tag-red">Incidents</span><span class="tag tag-blue">Postmortem</span></div>
+    </div>
+    <div class="card" style="--card-accent:var(--teal)">
+      <span class="card-icon">🔭</span>
+      <div class="card-title">Stack Open-Source Moderna</div>
+      <div class="card-body">A stack de elite em 2025: <strong>LGTM Stack</strong> — Loki (logs) + Grafana (visualização) + Tempo (traces) + Mimir (métricas Prometheus escalável). Totalmente open-source, escalável, e usada por grandes empresas. Alternativa poderosa ao Datadog sem o custo.</div>
+      <div class="card-tags"><span class="tag tag-teal">Loki</span><span class="tag tag-orange">Grafana</span><span class="tag tag-blue">Tempo</span><span class="tag tag-purple">Mimir</span></div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- SECTION 11: SEGURANCA -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section id="seguranca">
+<div class="container">
+  <div class="section-header">
+    <span class="section-num">11</span>
+    <div>
+      <div class="section-title">Segurança & DevSecOps</div>
+      <div class="section-desc">Segurança integrada em cada etapa — não como etapa final</div>
+    </div>
+  </div>
+
+  <div class="alert alert-danger">
+    <span class="alert-icon">🔥</span>
+    <div class="alert-body"><strong>Shift Left:</strong> Segurança deve ser integrada no início do desenvolvimento, não adicionada no fim. Cada pull request deve passar por verificações de segurança automatizadas.</div>
+  </div>
+
+  <div class="cards-grid cards-grid-2">
+    <div class="card" style="--card-accent:var(--red)">
+      <span class="card-icon">🔐</span>
+      <div class="card-title">IAM & Controle de Acesso</div>
+      <div class="card-body"><strong>Princípio de menor privilégio:</strong> Dar apenas as permissões necessárias. <strong>IAM Roles vs Users:</strong> Preferir roles a long-term access keys. <strong>AWS:</strong> IAM policies, SCP em Organizations, Permission Boundaries. <strong>MFA obrigatório</strong> para contas privilegiadas. Auditoria com CloudTrail/Audit Logs.</div>
+    </div>
+    <div class="card" style="--card-accent:var(--orange)">
+      <span class="card-icon">🗝️</span>
+      <div class="card-title">Gestão de Segredos</div>
+      <div class="card-body"><strong>Nunca</strong> colocar secrets em código ou variáveis de env sem criptografia. <strong>HashiCorp Vault:</strong> Padrão para gestão de secrets complexa. <strong>AWS Secrets Manager / Parameter Store.</strong> <strong>External Secrets Operator</strong> para K8s. Rotação automática de credenciais.</div>
+    </div>
+    <div class="card" style="--card-accent:var(--purple)">
+      <span class="card-icon">🐳</span>
+      <div class="card-title">Container Security</div>
+      <div class="card-body"><strong>Image scanning:</strong> Trivy, Grype, Snyk para CVEs. <strong>Runtime security:</strong> Falco para detectar comportamento anômalo em produção. <strong>Base images mínimas:</strong> Distroless, Alpine. <strong>Non-root containers.</strong> <strong>OPA/Gatekeeper:</strong> Políticas de segurança em K8s. Supply chain security: cosign, SBOM.</div>
+    </div>
+    <div class="card" style="--card-accent:var(--cyan)">
+      <span class="card-icon">🔬</span>
+      <div class="card-title">Pipeline Security (SAST/DAST)</div>
+      <div class="card-body"><strong>SAST:</strong> Análise estática de código (Semgrep, SonarQube, Bandit para Python). <strong>DAST:</strong> Testes dinâmicos contra app rodando (OWASP ZAP). <strong>SCA:</strong> Software Composition Analysis — dependências com vulnerabilidades (Dependabot, Snyk). <strong>IaC scanning:</strong> Checkov, tfsec para Terraform.</div>
+    </div>
+    <div class="card" style="--card-accent:var(--green)">
+      <span class="card-icon">🛡️</span>
+      <div class="card-title">Zero Trust Architecture</div>
+      <div class="card-body">Modelo: "Nunca confie, sempre verifique". <strong>Pilares:</strong> Identidade forte (MFA, certificates), device verification, network micro-segmentation, least-privilege access, continuous monitoring. <strong>Ferramentas:</strong> BeyondCorp (Google), Cloudflare Access, Tailscale. Substitui VPN tradicional.</div>
+    </div>
+    <div class="card" style="--card-accent:var(--pink)">
+      <span class="card-icon">📋</span>
+      <div class="card-title">Compliance & Hardening</div>
+      <div class="card-body"><strong>Benchmarks:</strong> CIS Benchmarks para Linux, Docker, Kubernetes. <strong>Frameworks:</strong> NIST CSF, ISO 27001, SOC 2. <strong>LGPD/GDPR:</strong> Compliance de dados no Brasil e Europa. <strong>Ferramentas:</strong> AWS Config, Security Hub, OpenSCAP. <strong>Hardening:</strong> Desabilitar serviços desnecessários, patch management.</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- SECTION 12: SRE -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section id="sre">
+<div class="container">
+  <div class="section-header">
+    <span class="section-num">12</span>
+    <div>
+      <div class="section-title">SRE — Site Reliability Engineering</div>
+      <div class="section-desc">Engenharia aplicada a confiabilidade — o modelo Google</div>
+    </div>
+  </div>
+
+  <div class="big-banner">
+    <h3>🔬 A Filosofia SRE</h3>
+    <p>SRE trata operações como problema de engenharia de software. Em vez de operadores que clicam em consoles, SREs escrevem código para automatizar operações. O Google criou o conceito: "Hope is not a strategy. Luck is not a factor. Fear is not an option."</p>
+  </div>
+
+  <div class="cards-grid cards-grid-3">
+    <div class="card" style="--card-accent:var(--accent)">
+      <span class="card-icon">📏</span>
+      <div class="card-title">SLI — Service Level Indicator</div>
+      <div class="card-body">A <strong>medição real</strong> de performance. Ex: "% de requests com latência < 200ms nas últimas 24h". Deve ser mensurável, automático e representativo da experiência do usuário. Evite SLIs que não medem o que o usuário sente.</div>
+    </div>
+    <div class="card" style="--card-accent:var(--orange)">
+      <span class="card-icon">🎯</span>
+      <div class="card-title">SLO — Service Level Objective</div>
+      <div class="card-body">A <strong>meta interna</strong> de confiabilidade. Ex: "99.5% das requests devem ter latência < 200ms". Deve ser acordado com o produto. Define o <strong>error budget</strong>: quanto de falha é aceitável. Se consumir o budget, parar features e focar em reliability.</div>
+    </div>
+    <div class="card" style="--card-accent:var(--green)">
+      <span class="card-icon">📜</span>
+      <div class="card-title">SLA — Service Level Agreement</div>
+      <div class="card-body">O <strong>contrato externo</strong> com cliente/usuário. Ex: "Garantimos 99.9% de uptime mensal ou há crédito". Sempre mais conservador que o SLO interno. Violação tem consequências financeiras. SLA > SLO > SLI em termos de rigor.</div>
+    </div>
+    <div class="card" style="--card-accent:var(--purple)">
+      <span class="card-icon">💥</span>
+      <div class="card-title">Chaos Engineering</div>
+      <div class="card-body">Injetar falhas propositais em produção para descobrir fraquezas antes que causem outages reais. <strong>Netflix Chaos Monkey:</strong> Mata instâncias aleatórias. <strong>Chaos Toolkit, LitmusChaos:</strong> Ferramentas open-source para K8s. Conceito: "O que não te mata em staging, te mata em produção."</div>
+    </div>
+    <div class="card" style="--card-accent:var(--red)">
+      <span class="card-icon">🚨</span>
+      <div class="card-title">Gestão de Incidentes</div>
+      <div class="card-body"><strong>Severidades:</strong> P1 (negócio parado) → P4 (cosmético). <strong>Incident Commander:</strong> Papel que coordena resposta. <strong>War room:</strong> Comunicação centralizada. <strong>Postmortem blameless:</strong> Foco em sistemas, não pessoas. <strong>MTTR:</strong> Mean Time to Recover — métrica chave.</div>
+    </div>
+    <div class="card" style="--card-accent:var(--cyan)">
+      <span class="card-icon">⚖️</span>
+      <div class="card-title">Toil Reduction</div>
+      <div class="card-body"><strong>Toil:</strong> Trabalho manual, repetitivo, sem valor de longo prazo. SREs devem gastar <50% do tempo em toil. O resto deve ser em engenharia que reduz trabalho futuro. Eliminar toil com automação é a essência do trabalho SRE.</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- SECTION 13: IA -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section id="ia">
+<div class="container">
+  <div class="section-header">
+    <span class="section-num">13</span>
+    <div>
+      <div class="section-title">IA & O Futuro do DevOps</div>
+      <div class="section-desc">Como a inteligência artificial está transformando infraestrutura</div>
+    </div>
+  </div>
+
+  <div class="cards-grid cards-grid-2">
+    <div class="card" style="--card-accent:var(--purple)">
+      <span class="card-icon">🤖</span>
+      <div class="card-title">AIOps — Operações com IA</div>
+      <div class="card-body">IA aplicada a operações de TI. <strong>Detecção de anomalias:</strong> Sistemas que aprendem padrões normais e alertam quando algo muda. <strong>Root cause analysis automatizado:</strong> Correlacionar logs + métricas + traces para apontar causa. <strong>Predição de capacidade:</strong> Antecipar quando recursos vão saturar. <strong>Ferramentas:</strong> Dynatrace, Grafana ML, AWS DevOps Guru.</div>
+      <div class="card-tags"><span class="tag tag-purple">Anomaly Detection</span><span class="tag tag-blue">Root Cause</span></div>
+    </div>
+    <div class="card" style="--card-accent:var(--accent)">
+      <span class="card-icon">🧑‍💻</span>
+      <div class="card-title">Copilots de Infraestrutura</div>
+      <div class="card-body"><strong>GitHub Copilot:</strong> Geração de Dockerfiles, Terraform, pipelines. <strong>Amazon Q Developer:</strong> Integrado a AWS, sugere configurações. <strong>Como usar bem:</strong> Para boilerplate e padrões conhecidos — ótimo. Para decisões arquiteturais complexas — revise cuidadosamente. Você precisa entender o que o copilot gera.</div>
+      <div class="card-tags"><span class="tag tag-blue">GitHub Copilot</span><span class="tag tag-orange">Amazon Q</span></div>
+    </div>
+    <div class="card" style="--card-accent:var(--green)">
+      <span class="card-icon">🧬</span>
+      <div class="card-title">AI Infra / LLMOps / MLOps</div>
+      <div class="card-body">A área que mais crescerá de 2025–2030. <strong>MLOps:</strong> Pipeline de treinamento, versionamento de modelos, monitoramento de drift. <strong>LLMOps:</strong> Infra para LLMs — GPUs, serving de modelos, RAG pipelines. <strong>Ferramentas:</strong> Kubeflow, MLflow, BentoML, vLLM, Ray. Profissionais que sabem infra + IA terão salários premium.</div>
+      <div class="card-tags"><span class="tag tag-green">MLOps</span><span class="tag tag-purple">LLMOps</span><span class="tag tag-orange">GPUs</span></div>
+    </div>
+    <div class="card" style="--card-accent:var(--orange)">
+      <span class="card-icon">🤝</span>
+      <div class="card-title">Agentes Autônomos em Infra</div>
+      <div class="card-body">Tendência 2025–2027: Agentes de IA que operam autonomamente — detectam problema, fazem diagnóstico, aplicam correção, notificam humano. <strong>Exemplo:</strong> Agente que detecta deployment com alta taxa de erro, reverte automaticamente, abre incident ticket e sugere solução. Humano é o revisor, não o executor.</div>
+      <div class="card-tags"><span class="tag tag-orange">Autonomous</span><span class="tag tag-purple">Self-healing</span></div>
+    </div>
+  </div>
+
+  <div class="divider"><div class="divider-line"></div><div class="divider-text">O que continuará valorizado mesmo com IA</div><div class="divider-line"></div></div>
+  <div style="display:flex;flex-wrap:wrap;gap:10px;">
+    <span class="skill-pill">🧠 Pensamento arquitetural</span>
+    <span class="skill-pill">⚖️ Trade-off analysis</span>
+    <span class="skill-pill">🔥 Incident response complexo</span>
+    <span class="skill-pill">🤝 Comunicação com stakeholders</span>
+    <span class="skill-pill">🛡️ Decisões de segurança</span>
+    <span class="skill-pill">🏗️ Design de plataformas</span>
+    <span class="skill-pill">💰 FinOps e otimização de custo</span>
+    <span class="skill-pill">🌐 Multi-cloud strategy</span>
+  </div>
+</div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- SECTION 14: PROGRAMACAO -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section id="programacao">
+<div class="container">
+  <div class="section-header">
+    <span class="section-num">14</span>
+    <div>
+      <div class="section-title">Programação para DevOps</div>
+      <div class="section-desc">Python, Bash e Go — o trio essencial</div>
+    </div>
+  </div>
+
+  <div class="cards-grid cards-grid-3">
+    <div class="card" style="--card-accent:var(--accent)">
+      <span class="card-icon">🐍</span>
+      <div class="card-title">Python — O Mais Importante</div>
+      <div class="card-body">
+        <strong>Por quê:</strong> É a lingua franca de DevOps, ML, scripts e automação.<br><br>
+        <strong>O que dominar:</strong> Boto3 (AWS SDK), requests (HTTP APIs), paramiko (SSH), subprocess (shell commands), argparse (CLIs), fastapi/flask (APIs internas), pytest (testes).<br><br>
+        <strong>Uso real:</strong> Scripts de automação cloud, lambdas, ferramentas internas, automação de onboarding, relatórios de custo, health check tools.
+      </div>
+      <div class="card-tags"><span class="tag tag-blue">Boto3</span><span class="tag tag-green">FastAPI</span><span class="tag tag-orange">Automação</span></div>
+    </div>
+    <div class="card" style="--card-accent:var(--orange)">
+      <span class="card-icon">💲</span>
+      <div class="card-title">Bash — Essencial no Dia a Dia</div>
+      <div class="card-body">
+        <strong>Por quê:</strong> Pipelines CI/CD, scripts de inicialização, automações simples em servidores.<br><br>
+        <strong>O que dominar:</strong> if/else, loops, funções, arrays, manipulação de strings, regex com grep/awk/sed, tratamento de erros (set -e, set -o pipefail), heredoc, trap para cleanup.<br><br>
+        <strong>Regra:</strong> Se o script passa de 200 linhas ou precisa de estruturas complexas, migre para Python.
+      </div>
+      <div class="card-tags"><span class="tag tag-orange">Shell</span><span class="tag tag-green">CI/CD</span><span class="tag tag-blue">Servidores</span></div>
+    </div>
+    <div class="card" style="--card-accent:var(--cyan)">
+      <span class="card-icon">🐹</span>
+      <div class="card-title">Go — Para Nível Avançado</div>
+      <div class="card-body">
+        <strong>Por quê:</strong> A linguagem do ecossistema cloud-native. Docker, Kubernetes, Terraform, Prometheus, Grafana-Agent — todos escritos em Go.<br><br>
+        <strong>O que dominar:</strong> Goroutines e channels (concorrência), HTTP servers, CLI com cobra, client-go (K8s API), operadores Kubernetes.<br><br>
+        <strong>Uso real:</strong> Escrever operadores K8s, ferramentas CLI, plugins para sistemas existentes. Diferencial forte de mercado.
+      </div>
+      <div class="card-tags"><span class="tag tag-cyan">Cloud-native</span><span class="tag tag-purple">K8s Operators</span><span class="tag tag-green">CLIs</span></div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- SECTION 15: PLATFORM ENGINEERING -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section id="platform">
+<div class="container">
+  <div class="section-header">
+    <span class="section-num">15</span>
+    <div>
+      <div class="section-title">Platform Engineering</div>
+      <div class="section-desc">A próxima evolução do DevOps — construindo plataformas para devs</div>
+    </div>
+  </div>
+
+  <div class="big-banner">
+    <h3>🏗️ O que é Platform Engineering?</h3>
+    <p>Enquanto DevOps foca em cultura e práticas, Platform Engineering foca em construir uma <strong>plataforma interna</strong> que permite desenvolvedores fazerem deploy, monitorar e operar serviços sem depender do time de infra. Você constrói o "produto" que os devs usam. É a tendência mais quente de 2024–2028 segundo o Gartner.</p>
+  </div>
+
+  <div class="cards-grid cards-grid-2">
+    <div class="card" style="--card-accent:var(--purple)">
+      <span class="card-icon">🛤️</span>
+      <div class="card-title">Golden Paths</div>
+      <div class="card-body">Caminhos predefinidos e aprovados para tarefas comuns. Ex: "Para criar um novo microserviço em Python, use este template — ele já inclui CI/CD, observabilidade, segurança e documentação configurados." O dev foca no código, não na infraestrutura. Reduz variabilidade e aumenta qualidade.</div>
+    </div>
+    <div class="card" style="--card-accent:var(--accent)">
+      <span class="card-icon">🖥️</span>
+      <div class="card-title">Internal Developer Platform (IDP)</div>
+      <div class="card-body">Portal de self-service onde devs podem: criar ambientes, fazer deploy, ver logs e métricas, solicitar recursos — sem abrir ticket para o time de infra. <strong>Ferramentas:</strong> Backstage (Spotify, open-source), Port, Cortex, Humanitec. Reduz o toil do time de plataforma e aumenta autonomia dos devs.</div>
+    </div>
+    <div class="card" style="--card-accent:var(--green)">
+      <span class="card-icon">😊</span>
+      <div class="card-title">Developer Experience (DevEx)</div>
+      <div class="card-body">A plataforma precisa ser fácil e prazerosa de usar. DX inclui: tempo de onboarding de novos devs, tempo de build e teste, clareza de feedback de erros, documentação interna. Métricas de DX estão sendo usadas para avaliar qualidade de plataformas.</div>
+    </div>
+    <div class="card" style="--card-accent:var(--orange)">
+      <span class="card-icon">📐</span>
+      <div class="card-title">Stack Técnica de Platform Eng</div>
+      <div class="card-body">Kubernetes como base. Terraform/Pulumi para IaC. ArgoCD/FluxCD para GitOps. Backstage para portal. Crossplane para provisionar infra via K8s APIs. Vault para secrets. Prometheus/Grafana para observabilidade. Cilium para networking.</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- SECTION 16: CARREIRA -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section id="carreira">
+<div class="container">
+  <div class="section-header">
+    <span class="section-num">16</span>
+    <div>
+      <div class="section-title">Mapa de Carreira</div>
+      <div class="section-desc">Do estágio ao Staff Engineer — como crescer rápido e estrategicamente</div>
+    </div>
+  </div>
+
+  <div class="progress-path">
+    <div class="path-node path-1">
+      <div class="path-circle">🌱</div>
+      <div class="path-title">Estágio / Jr</div>
+      <div class="path-time">0–1 ano</div>
+    </div>
+    <div class="path-node path-2">
+      <div class="path-circle">⚙️</div>
+      <div class="path-title">Pleno</div>
+      <div class="path-time">1–3 anos</div>
+    </div>
+    <div class="path-node path-3">
+      <div class="path-circle">🔥</div>
+      <div class="path-title">Sênior</div>
+      <div class="path-time">3–6 anos</div>
+    </div>
+    <div class="path-node path-4">
+      <div class="path-circle">🏛️</div>
+      <div class="path-title">Staff Eng</div>
+      <div class="path-time">6–10 anos</div>
+    </div>
+    <div class="path-node path-5">
+      <div class="path-circle">🌟</div>
+      <div class="path-title">Principal/Arch</div>
+      <div class="path-time">10+ anos</div>
+    </div>
+  </div>
+
+  <div style="margin-top:40px;"></div>
+
+  <table class="data-table" style="background:var(--panel);border:1px solid var(--border);border-radius:12px;overflow:hidden;">
+    <thead><tr><th>Nível</th><th>O que sabe fazer</th><th>Responsabilidades</th><th>O que buscar</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><span class="badge badge-nice">Estágio/Jr</span></td>
+        <td>Linux básico, Git, Docker, CI/CD básico, cloud intro</td>
+        <td>Executar tarefas definidas por sêniors, aprender, pedir ajuda</td>
+        <td>Primeiro emprego, projetos pessoais, certs entry-level</td>
+      </tr>
+      <tr>
+        <td><span class="badge badge-medium">Pleno</span></td>
+        <td>Kubernetes, Terraform, pipelines completos, observabilidade</td>
+        <td>Resolver problemas com autonomia, participar de on-call</td>
+        <td>Especializar em 1-2 áreas, contribuir em decisões técnicas</td>
+      </tr>
+      <tr>
+        <td><span class="badge badge-high">Sênior</span></td>
+        <td>Arquitetura cloud, SRE, segurança, mentoria, multi-cloud</td>
+        <td>Liderar projetos, definir padrões, mentorear, on-call lead</td>
+        <td>Certs avançadas, open-source, visibilidade externa</td>
+      </tr>
+      <tr>
+        <td><span class="badge badge-critical">Staff/Principal</span></td>
+        <td>Visão estratégica, impacto cross-team, design de plataforma</td>
+        <td>Decisões arquiteturais de longo prazo, influência organizacional</td>
+        <td>Publicações, talks, contribuição CNCF, liderança técnica</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="divider"><div class="divider-line"></div><div class="divider-text">Como ganhar experiência sem emprego</div><div class="divider-line"></div></div>
+
+  <div class="cards-grid cards-grid-3">
+    <div class="card" style="--card-accent:var(--green)">
+      <span class="card-icon">🏠</span>
+      <div class="card-title">Home Lab</div>
+      <div class="card-body">Compre um mini PC barato ou use um Raspberry Pi cluster. Instale Proxmox para virtualização. Rode K3s (Kubernetes leve). Deploy de apps reais. Monitore com Prometheus + Grafana. Pratique tudo sem gastar em cloud.</div>
+    </div>
+    <div class="card" style="--card-accent:var(--accent)">
+      <span class="card-icon">☁️</span>
+      <div class="card-title">Free Tiers de Cloud</div>
+      <div class="card-body">AWS Free Tier, GCP $300 de crédito, Oracle Cloud Forever Free. Use para praticar, construir projetos reais para portfólio. Documente tudo no GitHub com README completo explicando arquitetura e decisões.</div>
+    </div>
+    <div class="card" style="--card-accent:var(--purple)">
+      <span class="card-icon">🤝</span>
+      <div class="card-title">Open Source</div>
+      <div class="card-body">Contribua para projetos CNCF, Terraform providers, Helm charts. Mesmo documentação e exemplos contam. Abre portas diretas para Big Techs — Google, Red Hat, HashiCorp contratam contribuidores. É o portfólio mais forte possível.</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- SECTION 17: PORTFOLIO -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section id="portfolio">
+<div class="container">
+  <div class="section-header">
+    <span class="section-num">17</span>
+    <div>
+      <div class="section-title">Portfólio de Elite</div>
+      <div class="section-desc">Projetos reais que impressionam recrutadores técnicos</div>
+    </div>
+  </div>
+
+  <div class="cards-grid cards-grid-2">
+    <div class="card" style="--card-accent:var(--orange)">
+      <span class="card-icon">🏗️</span>
+      <div class="card-title">Projeto 1 — Infraestrutura Cloud Completa</div>
+      <div class="card-body">
+        Deploy de uma aplicação real em AWS com:<br>
+        • VPC com subnets públicas/privadas<br>
+        • EKS ou ECS com auto-scaling<br>
+        • RDS Multi-AZ com backups automáticos<br>
+        • CloudFront + WAF na frente<br>
+        • Todo provisionado via Terraform<br>
+        • GitHub Actions para CI/CD<br><br>
+        <strong>GitHub README detalhado com diagrama de arquitetura.</strong>
+      </div>
+      <div class="card-tags"><span class="tag tag-orange">AWS</span><span class="tag tag-blue">Terraform</span><span class="tag tag-green">EKS</span></div>
+    </div>
+    <div class="card" style="--card-accent:var(--purple)">
+      <span class="card-icon">⛵</span>
+      <div class="card-title">Projeto 2 — Kubernetes Production-Ready</div>
+      <div class="card-body">
+        Cluster Kubernetes com:<br>
+        • ArgoCD para GitOps<br>
+        • Istio service mesh com mTLS<br>
+        • Prometheus + Grafana + Alertmanager<br>
+        • Loki para logs<br>
+        • KEDA para auto-scaling por eventos<br>
+        • OPA/Gatekeeper para políticas<br>
+        • cert-manager para TLS automático
+      </div>
+      <div class="card-tags"><span class="tag tag-purple">K8s</span><span class="tag tag-blue">ArgoCD</span><span class="tag tag-cyan">Istio</span></div>
+    </div>
+    <div class="card" style="--card-accent:var(--red)">
+      <span class="card-icon">🔐</span>
+      <div class="card-title">Projeto 3 — Pipeline DevSecOps</div>
+      <div class="card-body">
+        CI/CD com segurança integrada:<br>
+        • SAST com Semgrep/Bandit<br>
+        • Container scanning com Trivy<br>
+        • IaC scanning com Checkov<br>
+        • Secret detection com gitleaks<br>
+        • SBOM generation com Syft<br>
+        • Signing de imagens com cosign<br>
+        • Falco para runtime security
+      </div>
+      <div class="card-tags"><span class="tag tag-red">DevSecOps</span><span class="tag tag-orange">SAST</span><span class="tag tag-green">Trivy</span></div>
+    </div>
+    <div class="card" style="--card-accent:var(--accent)">
+      <span class="card-icon">📊</span>
+      <div class="card-title">Projeto 4 — Plataforma de Observabilidade</div>
+      <div class="card-body">
+        Stack completa de observabilidade:<br>
+        • Aplicação com OpenTelemetry instrumentado<br>
+        • Métricas → Prometheus → Grafana<br>
+        • Logs → Loki → Grafana<br>
+        • Traces → Tempo → Grafana<br>
+        • Dashboards com os 4 Golden Signals<br>
+        • Alertas com runbooks linkados<br>
+        • SLO dashboards com error budget
+      </div>
+      <div class="card-tags"><span class="tag tag-blue">OTEL</span><span class="tag tag-orange">Grafana</span><span class="tag tag-purple">SLO</span></div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- SECTION 18: CERTS -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section id="certs">
+<div class="container">
+  <div class="section-header">
+    <span class="section-num">18</span>
+    <div>
+      <div class="section-title">Certificações Estratégicas</div>
+      <div class="section-desc">Quais valem cada centavo — e quais são apenas papel</div>
+    </div>
+  </div>
+
+  <div class="cert-grid">
+    <div class="cert-card">
+      <div class="cert-logo">🏆</div>
+      <div class="cert-body">
+        <div class="cert-name">CKA — Certified Kubernetes Administrator</div>
+        <div class="cert-desc">A mais respeitada de K8s. Prova prática (não múltipla escolha). Reconhecida globalmente. Peso altíssimo no mercado.</div>
+        <div class="cert-weight"><span class="badge badge-critical">Essencial</span></div>
+      </div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-logo">☁️</div>
+      <div class="cert-body">
+        <div class="cert-name">AWS Solutions Architect Associate</div>
+        <div class="cert-desc">A mais reconhecida de cloud. Cobre arquitetura, serviços, segurança e custo. Ótima para entrar no mercado cloud.</div>
+        <div class="cert-weight"><span class="badge badge-critical">Essencial</span></div>
+      </div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-logo">🔧</div>
+      <div class="cert-body">
+        <div class="cert-name">HashiCorp Terraform Associate</div>
+        <div class="cert-desc">Valida conhecimento sólido de Terraform. Muito pedida em vagas de DevOps/Cloud. Prova de múltipla escolha relativamente acessível.</div>
+        <div class="cert-weight"><span class="badge badge-high">Alta prioridade</span></div>
+      </div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-logo">🐧</div>
+      <div class="cert-body">
+        <div class="cert-name">LFCS / RHCSA</div>
+        <div class="cert-desc">Linux Foundation Certified Sysadmin ou Red Hat Certified Admin. Valida Linux operacional. RHCSA tem mais peso enterprise.</div>
+        <div class="cert-weight"><span class="badge badge-high">Alta prioridade</span></div>
+      </div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-logo">🔒</div>
+      <div class="cert-body">
+        <div class="cert-name">CKS — Certified Kubernetes Security</div>
+        <div class="cert-desc">Especialização de segurança em K8s. Requer CKA aprovado. Alta demanda, poucos profissionais. Premium salary.</div>
+        <div class="cert-weight"><span class="badge badge-medium">Diferencial forte</span></div>
+      </div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-logo">🟠</div>
+      <div class="cert-body">
+        <div class="cert-name">AWS DevOps Engineer Professional</div>
+        <div class="cert-desc">Nível Pro da AWS para DevOps. Mais difícil e valorizada que a Associate. Ótima para quem busca vagas sênior em AWS.</div>
+        <div class="cert-weight"><span class="badge badge-medium">Sênior+</span></div>
+      </div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-logo">🔵</div>
+      <div class="cert-body">
+        <div class="cert-name">GCP Professional Cloud Architect</div>
+        <div class="cert-desc">Muito valorizada especialmente em empresas de IA/ML (GCP forte aqui). Paga premium em nichos certos.</div>
+        <div class="cert-weight"><span class="badge badge-nice">Especialização</span></div>
+      </div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-logo">🛡️</div>
+      <div class="cert-body">
+        <div class="cert-name">AWS Security Specialty</div>
+        <div class="cert-desc">Especialização de segurança AWS. DevSecOps com essa cert tem altíssima demanda e salário premium.</div>
+        <div class="cert-weight"><span class="badge badge-medium">Diferencial</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="alert alert-warn" style="margin-top:24px;">
+    <span class="alert-icon">⚡</span>
+    <div class="alert-body"><strong>Estratégia inteligente:</strong> CKA + AWS SAA + Terraform Associate é o trio que abre mais portas. Depois escolha especialização por interesse: segurança (CKS + AWS Security), plataforma (CKAD), ou cloud profundo (Professional level). Certs sem experiência prática valem pouco — construa projetos junto.</div>
+  </div>
+</div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- SECTION 19: BIG TECHS -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section id="bigtechs">
+<div class="container">
+  <div class="section-header">
+    <span class="section-num">19</span>
+    <div>
+      <div class="section-title">Big Techs — Como Funcionam</div>
+      <div class="section-desc">Google, Amazon, Netflix, Meta, Uber — estruturas e o que valorizam</div>
+    </div>
+  </div>
+
+  <div class="cards-grid cards-grid-2">
+    <div class="card" style="--card-accent:var(--accent)">
+      <span class="card-icon">🔵</span>
+      <div class="card-title">Google — Criou o SRE</div>
+      <div class="card-body">O Google inventou o modelo SRE. Times de SRE cuidam de confiabilidade de produtos específicos (Google Search SRE, YouTube SRE). Forte cultura de postmortems, SLOs rigorosos e chaos engineering. Ferramentas criadas: Kubernetes, Borg, MapReduce, Prometheus (influência), BeyondCorp.<br><br><strong>Para entrar:</strong> Forte em algoritmos (LeetCode), sistemas distribuídos, design de sistemas de alta disponibilidade.</div>
+    </div>
+    <div class="card" style="--card-accent:var(--orange)">
+      <span class="card-icon">🟠</span>
+      <div class="card-title">Amazon — Escala Extreme</div>
+      <div class="card-body">Amazon opera na escala mais extrema do mundo com AWS. Cultura de "two-pizza teams" autônomos. Cada time possui sua infra e SLAs. "You build it, you run it" — devs são responsáveis por operações. Amazon Q Developer é seu copilot. Liderança com 16 Leadership Principles é base de toda entrevista.<br><br><strong>Para entrar:</strong> Comportamental (STAR method com LP), sistemas, coding.</div>
+    </div>
+    <div class="card" style="--card-accent:var(--red)">
+      <span class="card-icon">📺</span>
+      <div class="card-title">Netflix — Chaos Engineering</div>
+      <div class="card-body">Netflix é referência em chaos engineering (Chaos Monkey, Simian Army). Cultura de "Freedom and Responsibility" — times autônomos com alta expectativa. Tecnologias próprias: Spinnaker (CD), Atlas (métricas), Hystrix (circuit breaker), Zuul (gateway). Padrões que a indústria adotou.<br><br><strong>Para entrar:</strong> Senior+ apenas, excelência técnica, autonomia comprovada.</div>
+    </div>
+    <div class="card" style="--card-accent:var(--purple)">
+      <span class="card-icon">🔵</span>
+      <div class="card-title">Meta — Infrastructure at Scale</div>
+      <div class="card-body">Meta opera data centers próprios em escala imensa. Times de Production Engineering (equivalente ao SRE). Open-sourced: React, Cassandra, Presto, RocksDB, PyTorch. Forte em infra de ML e data. Time de infra de IA é muito relevante com crescimento de LLMs.<br><br><strong>Para entrar:</strong> Algoritmos fortes, systems design, coding em Python/C++.</div>
+    </div>
+  </div>
+
+  <div class="divider"><div class="divider-line"></div><div class="divider-text">Como se Destacar em Entrevistas de Big Tech</div><div class="divider-line"></div></div>
+  <div class="cards-grid cards-grid-3">
+    <div class="card"><span class="card-icon">📐</span><div class="card-title">System Design</div><div class="card-body">Domine design de sistemas distribuídos: como projetar YouTube, Uber, WhatsApp. Livros: "Designing Data-Intensive Applications" (Kleppmann) e "System Design Interview" (Alex Xu).</div></div>
+    <div class="card"><span class="card-icon">💻</span><div class="card-title">Coding (LeetCode)</div><div class="card-body">Big Techs pedem algoritmos e estruturas de dados. LeetCode Medium/Hard. Foco: arrays, hashmaps, graphs, dynamic programming, árvores. Não é só DevOps — você precisa saber programar bem.</div></div>
+    <div class="card"><span class="card-icon">🗣️</span><div class="card-title">Comportamental (STAR)</div><div class="card-body">Situation, Task, Action, Result. Prepare histórias reais de: conflito resolvido, projeto liderado, falha e aprendizado, melhoria de processo. Amazon vai perguntar para cada Leadership Principle.</div></div>
+  </div>
+</div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- SECTION 20: SALARIOS -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section id="salarios">
+<div class="container">
+  <div class="section-header">
+    <span class="section-num">20</span>
+    <div>
+      <div class="section-title">Salários & Mercado</div>
+      <div class="section-desc">Faixas reais — Brasil, exterior e remoto internacional (2025)</div>
+    </div>
+  </div>
+
+  <div class="salary-grid">
+    <div class="salary-card salary-br">
+      <div class="salary-country">🇧🇷 Brasil (CLT/PJ)</div>
+      <div class="salary-row"><span class="salary-level">Estágio</span><span class="salary-val" style="color:var(--green2)">R$ 1.500–3.000</span></div>
+      <div class="salary-row"><span class="salary-level">Júnior</span><span class="salary-val" style="color:var(--green2)">R$ 4.000–8.000</span></div>
+      <div class="salary-row"><span class="salary-level">Pleno</span><span class="salary-val" style="color:var(--green2)">R$ 8.000–15.000</span></div>
+      <div class="salary-row"><span class="salary-level">Sênior</span><span class="salary-val" style="color:var(--orange2)">R$ 15.000–28.000</span></div>
+      <div class="salary-row"><span class="salary-level">Staff/Arquiteto</span><span class="salary-val" style="color:var(--orange2)">R$ 25.000–50.000+</span></div>
+    </div>
+    <div class="salary-card salary-us">
+      <div class="salary-country">🇺🇸 EUA (Remote/Onsite)</div>
+      <div class="salary-row"><span class="salary-level">Júnior</span><span class="salary-val" style="color:var(--accent2)">$80k–110k/ano</span></div>
+      <div class="salary-row"><span class="salary-level">Pleno</span><span class="salary-val" style="color:var(--accent2)">$110k–150k/ano</span></div>
+      <div class="salary-row"><span class="salary-level">Sênior</span><span class="salary-val" style="color:var(--purple2)">$150k–200k/ano</span></div>
+      <div class="salary-row"><span class="salary-level">Staff</span><span class="salary-val" style="color:var(--purple2)">$200k–280k/ano</span></div>
+      <div class="salary-row"><span class="salary-level">Big Tech Sênior+</span><span class="salary-val" style="color:var(--pink)">$250k–400k+ (total comp)</span></div>
+    </div>
+    <div class="salary-card salary-eu">
+      <div class="salary-country">🌍 Remoto Internacional (PJ)</div>
+      <div class="salary-row"><span class="salary-level">Júnior</span><span class="salary-val" style="color:var(--orange2)">$30k–60k/ano</span></div>
+      <div class="salary-row"><span class="salary-level">Pleno</span><span class="salary-val" style="color:var(--orange2)">$60k–100k/ano</span></div>
+      <div class="salary-row"><span class="salary-level">Sênior</span><span class="salary-val" style="color:var(--pink)">$100k–160k/ano</span></div>
+      <div class="salary-row"><span class="salary-level">Staff/Principal</span><span class="salary-val" style="color:var(--pink)">$150k–220k/ano</span></div>
+      <div class="salary-row"><span class="salary-level">+ Especialização IA</span><span class="salary-val" style="color:var(--red)">+30–50% premium</span></div>
+    </div>
+  </div>
+
+  <div class="divider"><div class="divider-line"></div><div class="divider-text">Habilidades que pagam premium</div><div class="divider-line"></div></div>
+  <div style="display:flex;flex-wrap:wrap;gap:10px;">
+    <span class="skill-pill">🤖 IA Infra / LLMOps → +40%</span>
+    <span class="skill-pill">🔒 Cloud Security → +30%</span>
+    <span class="skill-pill">⛵ Kubernetes avançado → +25%</span>
+    <span class="skill-pill">🏗️ Platform Engineering → +30%</span>
+    <span class="skill-pill">💰 FinOps → +20%</span>
+    <span class="skill-pill">🌐 Multi-cloud → +20%</span>
+    <span class="skill-pill">🌍 Inglês fluente → +50-200%</span>
+  </div>
+</div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- SECTION 21: PLANO DE ESTUDOS -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section id="plano">
+<div class="container">
+  <div class="section-header">
+    <span class="section-num">21</span>
+    <div>
+      <div class="section-title">Plano de Estudos</div>
+      <div class="section-desc">Do zero ao emprego — cronogramas reais e acionáveis</div>
+    </div>
+  </div>
+
+  <div class="plan-grid">
+    <div class="plan-card">
+      <div class="plan-header">
+        <div class="plan-duration" style="color:var(--green2)">30 Dias</div>
+        <div class="plan-goal">Meta: Fundamentos sólidos de Linux e redes</div>
+      </div>
+      <div class="plan-body">
+        <div class="plan-week">
+          <div class="plan-week-label">Semana 1</div>
+          <div class="plan-tasks">
+            <div class="plan-task">Linux: terminal, comandos básicos</div>
+            <div class="plan-task">Prática diária no terminal (1h/dia)</div>
+            <div class="plan-task">Git: clone, commit, push, branches</div>
+          </div>
+        </div>
+        <div class="plan-week">
+          <div class="plan-week-label">Semana 2</div>
+          <div class="plan-tasks">
+            <div class="plan-task">Redes: TCP/IP, DNS, HTTP/HTTPS</div>
+            <div class="plan-task">SSH: configurar servidor Linux</div>
+            <div class="plan-task">Bash scripting básico</div>
+          </div>
+        </div>
+        <div class="plan-week">
+          <div class="plan-week-label">Semana 3-4</div>
+          <div class="plan-tasks">
+            <div class="plan-task">Docker: Dockerfile, compose</div>
+            <div class="plan-task">Python: scripts básicos de automação</div>
+            <div class="plan-task">Primeiro projeto no GitHub</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="plan-card">
+      <div class="plan-header">
+        <div class="plan-duration" style="color:var(--accent2)">90 Dias</div>
+        <div class="plan-goal">Meta: Pronto para vaga Júnior DevOps</div>
+      </div>
+      <div class="plan-body">
+        <div class="plan-week">
+          <div class="plan-week-label">Mês 1</div>
+          <div class="plan-tasks">
+            <div class="plan-task">Kubernetes básico (pods, services, deploy)</div>
+            <div class="plan-task">AWS: EC2, S3, VPC, IAM (free tier)</div>
+            <div class="plan-task">Terraform: primeiro projeto AWS</div>
+          </div>
+        </div>
+        <div class="plan-week">
+          <div class="plan-week-label">Mês 2</div>
+          <div class="plan-tasks">
+            <div class="plan-task">GitHub Actions: pipeline CI/CD completo</div>
+            <div class="plan-task">Prometheus + Grafana: monitoramento</div>
+            <div class="plan-task">Projeto portfólio: infra AWS + K8s</div>
+          </div>
+        </div>
+        <div class="plan-week">
+          <div class="plan-week-label">Mês 3</div>
+          <div class="plan-tasks">
+            <div class="plan-task">AWS SAA: preparação e prova</div>
+            <div class="plan-task">Refinamento do portfólio</div>
+            <div class="plan-task">Candidaturas e networking</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="plan-card">
+      <div class="plan-header">
+        <div class="plan-duration" style="color:var(--orange2)">1 Ano</div>
+        <div class="plan-goal">Meta: DevOps Pleno, pronto para remoto</div>
+      </div>
+      <div class="plan-body">
+        <div class="plan-week">
+          <div class="plan-week-label">Q1 (meses 1-3)</div>
+          <div class="plan-tasks">
+            <div class="plan-task">Fundamentos + Docker + cloud básico</div>
+            <div class="plan-task">AWS SAA aprovado</div>
+            <div class="plan-task">Primeiro emprego ou freela</div>
+          </div>
+        </div>
+        <div class="plan-week">
+          <div class="plan-week-label">Q2 (meses 4-6)</div>
+          <div class="plan-tasks">
+            <div class="plan-task">Kubernetes avançado + Helm + ArgoCD</div>
+            <div class="plan-task">Terraform avançado + módulos</div>
+            <div class="plan-task">CKA: preparação e prova</div>
+          </div>
+        </div>
+        <div class="plan-week">
+          <div class="plan-week-label">Q3-Q4 (meses 7-12)</div>
+          <div class="plan-tasks">
+            <div class="plan-task">Observabilidade full stack (LGTM)</div>
+            <div class="plan-task">DevSecOps: pipeline + scanning</div>
+            <div class="plan-task">Portfólio elite + candidaturas internacionais</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="plan-card">
+      <div class="plan-header">
+        <div class="plan-duration" style="color:var(--purple2)">3 Anos</div>
+        <div class="plan-goal">Meta: Sênior / Staff global</div>
+      </div>
+      <div class="plan-body">
+        <div class="plan-week">
+          <div class="plan-week-label">Ano 1</div>
+          <div class="plan-tasks">
+            <div class="plan-task">Fundamentos → Júnior → Pleno</div>
+            <div class="plan-task">AWS SAA + Terraform Associate + CKA</div>
+            <div class="plan-task">Primeiro emprego DevOps</div>
+          </div>
+        </div>
+        <div class="plan-week">
+          <div class="plan-week-label">Ano 2</div>
+          <div class="plan-tasks">
+            <div class="plan-task">Pleno com contribuição open-source</div>
+            <div class="plan-task">Especialização: SRE ou Platform Eng</div>
+            <div class="plan-task">Inglês técnico fluente</div>
+          </div>
+        </div>
+        <div class="plan-week">
+          <div class="plan-week-label">Ano 3</div>
+          <div class="plan-tasks">
+            <div class="plan-task">Sênior + visibilidade externa (blog/talks)</div>
+            <div class="plan-task">AWS Professional ou CKS</div>
+            <div class="plan-task">Vagas remotas internacionais ($100k+)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="alert alert-success" style="margin-top:24px;">
+    <span class="alert-icon">⏰</span>
+    <div class="alert-body"><strong>Rotina diária ideal:</strong> 2-3 horas/dia de estudo focado é suficiente para avançar rápido. 1h de teoria, 1-2h de prática hands-on. Pomodoro (25min foco / 5min pausa). Fins de semana: projetos maiores. Evite estudar sem praticar — é a receita do burnout sem resultado.</div>
+  </div>
+</div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- SECTION 22: RECURSOS -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section id="recursos">
+<div class="container">
+  <div class="section-header">
+    <span class="section-num">22</span>
+    <div>
+      <div class="section-title">Recursos de Elite</div>
+      <div class="section-desc">Os melhores livros, cursos, labs e comunidades</div>
+    </div>
+  </div>
+
+  <div class="cards-grid cards-grid-2">
+    <div class="card" style="--card-accent:var(--orange)">
+      <span class="card-icon">📚</span>
+      <div class="card-title">Livros Essenciais</div>
+      <div class="card-body">
+        <strong>The Phoenix Project</strong> — Gene Kim (cultura DevOps em forma de romance)<br>
+        <strong>Site Reliability Engineering</strong> — Google (gratuito online)<br>
+        <strong>Designing Data-Intensive Applications</strong> — Kleppmann<br>
+        <strong>The DevOps Handbook</strong> — Gene Kim<br>
+        <strong>Kubernetes in Action</strong> — Marko Luksa<br>
+        <strong>Terraform: Up and Running</strong> — Yevgeniy Brikman<br>
+        <strong>The Linux Command Line</strong> — William Shotts (gratuito)
+      </div>
+    </div>
+    <div class="card" style="--card-accent:var(--purple)">
+      <span class="card-icon">🎓</span>
+      <div class="card-title">Plataformas de Cursos</div>
+      <div class="card-body">
+        <strong>KodeKloud</strong> — melhor para K8s, Docker, Linux hands-on<br>
+        <strong>A Cloud Guru / Pluralsight</strong> — AWS, Azure, GCP<br>
+        <strong>Linux Foundation (LFX)</strong> — cursos oficiais e certificações<br>
+        <strong>HashiCorp Learn</strong> — Terraform, Vault (gratuito)<br>
+        <strong>Killercoda</strong> — labs grátis de K8s no browser<br>
+        <strong>AWS Skill Builder</strong> — gratuito, oficial AWS<br>
+        <strong>Udemy</strong> — curso do Mumshad Mannambeth (K8s)
+      </div>
+    </div>
+    <div class="card" style="--card-accent:var(--cyan)">
+      <span class="card-icon">🔬</span>
+      <div class="card-title">Labs & Prática Hands-on</div>
+      <div class="card-body">
+        <strong>Killercoda</strong> — Labs K8s, Linux grátis no browser<br>
+        <strong>Play with Kubernetes</strong> — cluster temporário grátis<br>
+        <strong>KodeKloud Engineer</strong> — tarefas reais em ambiente simulado<br>
+        <strong>TerraformLabs.io</strong> — labs Terraform<br>
+        <strong>AWS Free Tier + CloudFormation Playground</strong><br>
+        <strong>GitHub Codespaces</strong> — ambiente dev na nuvem grátis<br>
+        <strong>Oracle Cloud Free Tier</strong> — recursos sempre grátis
+      </div>
+    </div>
+    <div class="card" style="--card-accent:var(--green)">
+      <span class="card-icon">📰</span>
+      <div class="card-title">Newsletters & Blogs</div>
+      <div class="card-body">
+        <strong>DevOps'ish</strong> — curadoria semanal (Chris Short)<br>
+        <strong>CNCF Blog</strong> — cloud-native official<br>
+        <strong>The New Stack</strong> — notícias de infra e cloud<br>
+        <strong>Last Week in AWS</strong> — Corey Quinn<br>
+        <strong>Google SRE Blog</strong> — artigos técnicos do Google<br>
+        <strong>Martin Fowler's Blog</strong> — arquitetura e engenharia<br>
+        <strong>ByteByteGo Newsletter</strong> — system design semanal
+      </div>
+    </div>
+    <div class="card" style="--card-accent:var(--red)">
+      <span class="card-icon">📺</span>
+      <div class="card-title">YouTube Canais</div>
+      <div class="card-body">
+        <strong>TechWorld with Nana</strong> — K8s, Docker, GitOps explicados<br>
+        <strong>NetworkChuck</strong> — Linux, redes, cloud acessível<br>
+        <strong>KodeKloud</strong> — tutoriais hands-on<br>
+        <strong>That DevOps Guy</strong> — K8s e cloud avançado<br>
+        <strong>DevOps Toolkit</strong> — Viktor Farcic (avançado)<br>
+        <strong>Fireship</strong> — conceitos rápidos e modernos<br>
+        <strong>AWS Events</strong> — re:Invent talks (gratuito no YT)
+      </div>
+    </div>
+    <div class="card" style="--card-accent:var(--teal)">
+      <span class="card-icon">🤝</span>
+      <div class="card-title">Comunidades</div>
+      <div class="card-body">
+        <strong>CNCF Slack</strong> — comunidade cloud-native global<br>
+        <strong>DevOps Brasil (Telegram/Discord)</strong><br>
+        <strong>KodeKloud Community</strong> — Discord ativo<br>
+        <strong>r/devops</strong> — Reddit com discussões relevantes<br>
+        <strong>GitHub Discussions</strong> — projetos como Argo, Flux<br>
+        <strong>HashiCorp Discuss</strong> — fórum oficial Terraform<br>
+        <strong>LinkedIn Learning communities</strong>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- SECTION 23: MAPA VISUAL -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section id="mapa">
+<div class="container">
+  <div class="section-header">
+    <span class="section-num">23</span>
+    <div>
+      <div class="section-title">Mapa Visual de Habilidades</div>
+      <div class="section-desc">Árvore completa de dependências e prioridades</div>
+    </div>
+  </div>
+
+  <div class="tree">
+    <div class="tree-branch open">
+      <div class="tree-branch-header" onclick="toggleBranch(this)">
+        <span class="tree-branch-icon">🌱</span>
+        <span class="tree-branch-title">NÍVEL 1 — Fundamentos (Obrigatório antes de tudo)</span>
+        <span class="tree-branch-count">7 tópicos</span>
+        <span class="tree-arrow">▶</span>
+      </div>
+      <div class="tree-leaves">
+        <div class="leaf-grid">
+          <div class="leaf"><div class="leaf-dot" style="background:var(--red)"></div>Linux & Terminal</div>
+          <div class="leaf"><div class="leaf-dot" style="background:var(--red)"></div>Redes TCP/IP</div>
+          <div class="leaf"><div class="leaf-dot" style="background:var(--red)"></div>HTTP/DNS/SSH</div>
+          <div class="leaf"><div class="leaf-dot" style="background:var(--red)"></div>Git & GitHub</div>
+          <div class="leaf"><div class="leaf-dot" style="background:var(--red)"></div>Bash Scripting</div>
+          <div class="leaf"><div class="leaf-dot" style="background:var(--orange)"></div>Python Básico</div>
+          <div class="leaf"><div class="leaf-dot" style="background:var(--orange)"></div>SQL Básico</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tree-branch">
+      <div class="tree-branch-header" onclick="toggleBranch(this)">
+        <span class="tree-branch-icon">⚙️</span>
+        <span class="tree-branch-title">NÍVEL 2 — Core DevOps (Júnior/Pleno)</span>
+        <span class="tree-branch-count">10 tópicos</span>
+        <span class="tree-arrow">▶</span>
+      </div>
+      <div class="tree-leaves">
+        <div class="leaf-grid">
+          <div class="leaf"><div class="leaf-dot" style="background:var(--red)"></div>Docker</div>
+          <div class="leaf"><div class="leaf-dot" style="background:var(--red)"></div>Kubernetes Básico</div>
+          <div class="leaf"><div class="leaf-dot" style="background:var(--red)"></div>CI/CD (GitHub Actions)</div>
+          <div class="leaf"><div class="leaf-dot" style="background:var(--red)"></div>Terraform</div>
+          <div class="leaf"><div class="leaf-dot" style="background:var(--orange)"></div>Cloud (AWS/GCP)</div>
+          <div class="leaf"><div class="leaf-dot" style="background:var(--orange)"></div>Monitoring Básico</div>
+          <div class="leaf"><div class="leaf-dot" style="background:var(--orange)"></div>Helm</div>
+          <div class="leaf"><div class="leaf-dot" style="background:var(--orange)"></div>Segurança Básica</div>
+          <div class="leaf"><div class="leaf-dot" style="background:var(--accent)"></div>Ansible</div>
+          <div class="leaf"><div class="leaf-dot" style="background:var(--accent)"></div>GitLab CI</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tree-branch">
+      <div class="tree-branch-header" onclick="toggleBranch(this)">
+        <span class="tree-branch-icon">🔥</span>
+        <span class="tree-branch-title">NÍVEL 3 — Avançado (Sênior)</span>
+        <span class="tree-branch-count">12 tópicos</span>
+        <span class="tree-arrow">▶</span>
+      </div>
+      <div class="tree-leaves">
+        <div class="leaf-grid">
+          <div class="leaf"><div class="leaf-dot" style="background:var(--orange)"></div>Kubernetes Avançado</div>
+          <div class="leaf"><div class="leaf-dot" style="background:var(--orange)"></div>ArgoCD / GitOps</div>
+          <div class="leaf"><div class="leaf-dot" style="background:var(--orange)"></div>Service Mesh (Istio)</div>
+          <div class="leaf"><div class="leaf-dot" style="background:var(--orange)"></div>Observabilidade Full</div>
+          <div class="leaf"><div class="leaf-dot" style="background:var(--orange)"></div>SRE Practices</div>
+          <div class="leaf"><div class="leaf-dot" style="background:var(--orange)"></div>DevSecOps</div>
+          <div class="leaf"><div class="leaf-dot" style="background:var(--orange)"></div>Terraform Avançado</div>
+          <div class="leaf"><div class="leaf-dot" style="background:var(--orange)"></div>Multi-cloud</div>
+          <div class="leaf"><div class="leaf-dot" style="background:var(--accent)"></div>Chaos Engineering</div>
+          <div class="leaf"><div class="leaf-dot" style="background:var(--accent)"></div>FinOps</div>
+          <div class="leaf"><div class="leaf-dot" style="background:var(--accent)"></div>Go Language</div>
+          <div class="leaf"><div class="leaf-dot" style="background:var(--accent)"></div>OpenTelemetry</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tree-branch">
+      <div class="tree-branch-header" onclick="toggleBranch(this)">
+        <span class="tree-branch-icon">🌟</span>
+        <span class="tree-branch-title">NÍVEL 4 — Elite/Global (Staff+)</span>
+        <span class="tree-branch-count">10 tópicos</span>
+        <span class="tree-arrow">▶</span>
+      </div>
+      <div class="tree-leaves">
+        <div class="leaf-grid">
+          <div class="leaf"><div class="leaf-dot" style="background:var(--pink)"></div>Cloud Architecture</div>
+          <div class="leaf"><div class="leaf-dot" style="background:var(--pink)"></div>Platform Engineering</div>
+          <div class="leaf"><div class="leaf-dot" style="background:var(--pink)"></div>AI Infra / LLMOps</div>
+          <div class="leaf"><div class="leaf-dot" style="background:var(--pink)"></div>Distributed Systems</div>
+          <div class="leaf"><div class="leaf-dot" style="background:var(--pink)"></div>Internal Dev Platform</div>
+          <div class="leaf"><div class="leaf-dot" style="background:var(--pink)"></div>Open Source Leadership</div>
+          <div class="leaf"><div class="leaf-dot" style="background:var(--purple)"></div>Technical Writing</div>
+          <div class="leaf"><div class="leaf-dot" style="background:var(--purple)"></div>Conference Speaking</div>
+          <div class="leaf"><div class="leaf-dot" style="background:var(--purple)"></div>Cross-org Influence</div>
+          <div class="leaf"><div class="leaf-dot" style="background:var(--purple)"></div>Mentoring</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- SECTION 24: MENTALIDADE -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section id="mentalidade">
+<div class="container">
+  <div class="section-header">
+    <span class="section-num">24</span>
+    <div>
+      <div class="section-title">Mentalidade de Engenheira DevOps de Elite</div>
+      <div class="section-desc">Como profissionais excepcionais pensam e operam</div>
+    </div>
+  </div>
+
+  <div class="big-banner">
+    <h3>🧠 O Maior Diferencial Não É Técnico</h3>
+    <p>Você pode aprender qualquer ferramenta em semanas. O que separa um profissional mediano de um excepcional é como você pensa, como você resolve problemas, e como você enxerga sistemas. Ferramentas mudam. Mentalidade é permanente.</p>
+  </div>
+
+  <div class="cards-grid cards-grid-2">
+    <div class="card" style="--card-accent:var(--green)">
+      <span class="card-icon">✅</span>
+      <div class="card-title">Hábitos que Aceleram a Carreira</div>
+      <div class="card-body">
+        <div class="checklist">
+          <div class="check-item"><div class="check-box"></div>Documentar tudo que você faz — serve pra você e pra equipe</div>
+          <div class="check-item"><div class="check-box"></div>Automatizar antes de fazer manualmente pela 3a vez</div>
+          <div class="check-item"><div class="check-box"></div>Estudar o "por quê" antes do "como"</div>
+          <div class="check-item"><div class="check-box"></div>Construir em público (GitHub, LinkedIn, blog)</div>
+          <div class="check-item"><div class="check-box"></div>Postmortem de tudo que dá errado — sem culpa</div>
+          <div class="check-item"><div class="check-box"></div>Networking genuíno com engenheiros melhores que você</div>
+          <div class="check-item"><div class="check-box"></div>Ler papers e RFCs originais das tecnologias</div>
+        </div>
+      </div>
+    </div>
+    <div class="card" style="--card-accent:var(--red)">
+      <span class="card-icon">❌</span>
+      <div class="card-title">Erros que Atrasam Carreiras</div>
+      <div class="card-body">
+        <div class="checklist">
+          <div class="check-item done"><div class="check-box">✗</div>Colecionar certs sem fazer projetos reais</div>
+          <div class="check-item done"><div class="check-box">✗</div>Aprender ferramentas sem entender os fundamentos</div>
+          <div class="check-item done"><div class="check-box">✗</div>Copiar tutoriais sem entender o que cada linha faz</div>
+          <div class="check-item done"><div class="check-box">✗</div>Nunca colocar nada em produção real</div>
+          <div class="check-item done"><div class="check-box">✗</div>Trabalhar em silos — DevOps é sobre colaboração</div>
+          <div class="check-item done"><div class="check-box">✗</div>Ignorar inglês — é pré-requisito global</div>
+          <div class="check-item done"><div class="check-box">✗</div>Virar "decorador de ferramentas" sem pensamento sistêmico</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"><div class="divider-line"></div><div class="divider-text">Pensamento Sistêmico em Produção</div><div class="divider-line"></div></div>
+
+  <div class="cards-grid cards-grid-3">
+    <div class="card" style="--card-accent:var(--accent)">
+      <span class="card-icon">🔍</span>
+      <div class="card-title">Olhe para o Sistema, Não para o Componente</div>
+      <div class="card-body">Quando algo falha, não olhe só para o componente quebrado. Pergunte: que outros sistemas dependem disso? O que mudou nas últimas horas? O sistema estava sob pressão incomum? Falhas em sistemas complexos raramente têm uma causa única.</div>
+    </div>
+    <div class="card" style="--card-accent:var(--orange)">
+      <span class="card-icon">⚡</span>
+      <div class="card-title">Calm Under Fire</div>
+      <div class="card-body">Em incidentes P1, profissionais de elite ficam calmos e metódicos. Não entram em pânico, não tomam decisões impulsivas sem entender a causa. Diagnóstico primeiro, ação depois. "Primum non nocere" — primeiro não faça pior.</div>
+    </div>
+    <div class="card" style="--card-accent:var(--purple)">
+      <span class="card-icon">🎯</span>
+      <div class="card-title">Como Não Ser Substituível</div>
+      <div class="card-body">Você se torna difícil de substituir não por saber mais ferramentas, mas por entender o negócio, ter contexto histórico de decisões, construir relações de confiança e ser a pessoa que os outros procuram quando há um problema sério.</div>
+    </div>
+  </div>
+
+  <div class="alert alert-success" style="margin-top:32px;">
+    <span class="alert-icon">🚀</span>
+    <div class="alert-body"><strong>A missão final:</strong> Não seja uma profissional que opera ferramentas. Seja uma engenheira que resolve problemas de negócio usando tecnologia como instrumento. Quando você chegar nesse nível de pensamento, nenhuma mudança de ferramenta, framework ou moda vai te substituir. A tecnologia muda. Engenheiras de elite evoluem com ela.</div>
+  </div>
+</div>
+</section>
+
+</main>
+
+<footer>
+<div class="container">
+  <div class="footer-logo">DevOps Roadmap</div>
+  <p class="footer-text">
+    Criado como guia de estudos moderno e completo · Atualizado para 2025–2028<br>
+    Fundamentos → Core Skills → Advanced → Elite · Do zero ao nível internacional<br><br>
+    <span style="color:var(--muted2);font-size:11px;font-family:'JetBrains Mono',monospace;">Clique nos módulos no menu superior para navegar · Use a barra lateral para acompanhar o progresso</span>
+  </p>
+</div>
+</footer>
+
+<script>
+// Tree toggle
+function toggleBranch(header) {
+  const branch = header.parentElement;
+  branch.classList.toggle('open');
+}
+
+// Nav active state
+const sections = document.querySelectorAll('section[id]');
+const navBtns = document.querySelectorAll('.nav-btn');
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      navBtns.forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.getAttribute('href') === '#' + entry.target.id) {
+          btn.classList.add('active');
+          btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        }
+      });
+    }
+  });
+}, { threshold: 0.2 });
+
+sections.forEach(s => observer.observe(s));
+
+// Checklist toggle
+document.querySelectorAll('.check-item:not(.done)').forEach(item => {
+  item.addEventListener('click', () => {
+    item.classList.toggle('completed');
+    if (item.classList.contains('completed')) {
+      item.querySelector('.check-box').textContent = '✓';
+      item.style.opacity = '0.5';
+    } else {
+      item.querySelector('.check-box').textContent = '';
+      item.style.opacity = '1';
+    }
+  });
+});
+
+// Animate on scroll
+const animateObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.animation = 'fadeIn 0.5s ease forwards';
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.card, .tl-item').forEach(el => {
+  el.style.opacity = '0';
+  animateObserver.observe(el);
+});
+</script>
+
+<footer class="credit">
+    © 2026 • Lívia Nalanda
+</footer>
+</body>
+</html>
