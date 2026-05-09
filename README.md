@@ -12,7 +12,7 @@ Mapa visual e estratégico de DevOps, Cloud e Infraestrutura Moderna, criado par
 
 ## 📸 Pré-visualização
 
-![Preview do Projeto](./screenshot.png)
+![Preview](assets/screenshot.png)
 
 ---
 
